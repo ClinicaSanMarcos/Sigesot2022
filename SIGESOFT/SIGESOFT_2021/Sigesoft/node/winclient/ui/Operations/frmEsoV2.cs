@@ -2108,19 +2108,23 @@ namespace Sigesoft.Node.WinClient.UI.Operations
 
         private void ViewMode(string mode)
         {
-            if (_tipo == (int)MasterService.AtxMedicaParticular || _tipo == (int)MasterService.AtxMedicaSeguros)
-            {
-                //tcSubMain.TabPages.Remove(tp);
-                tcSubMain.TabPages.Remove(General);
-                tcSubMain.TabPages.Remove(tpConclusion);
-            }
-            else
-            {
-                tcSubMain.TabPages.Remove(tpAtencionIntegral);
-                tcSubMain.TabPages.Remove(tpDatosGeneralesAntecedentes);
-                tcSubMain.TabPages.Remove(tpCuidadosPreventivos);
-                tcSubMain.SelectedIndex = 0;
-            }
+            tcSubMain.TabPages.Remove(tpAtencionIntegral);
+            tcSubMain.TabPages.Remove(tpDatosGeneralesAntecedentes);
+            tcSubMain.TabPages.Remove(tpCuidadosPreventivos);
+
+            //if (_tipo == (int)MasterService.AtxMedicaParticular || _tipo == (int)MasterService.AtxMedicaSeguros)
+            //{
+            //    tcSubMain.TabPages.Remove(tp);
+            //    tcSubMain.TabPages.Remove(General);
+            //    tcSubMain.TabPages.Remove(tpConclusion);
+            //}
+            //else
+            //{
+            //    tcSubMain.TabPages.Remove(tpAtencionIntegral);
+            //    tcSubMain.TabPages.Remove(tpDatosGeneralesAntecedentes);
+            //    tcSubMain.TabPages.Remove(tpCuidadosPreventivos);
+            //    tcSubMain.SelectedIndex = 0;
+            //}
 
             // Setear por default un examen componente desde consusltorio
             //#region Set Tab x default
@@ -2190,66 +2194,66 @@ namespace Sigesoft.Node.WinClient.UI.Operations
         }
         private void ConstruirFormularioAntecedentes()
         {
-            int GrupoBase = 282; //Antecedentes
-            GrupoEtario = new ServiceBL().ObtenerIdGrupoEtarioDePaciente(_age);
-            int Grupo = int.Parse(GrupoBase.ToString() + GrupoEtario.ToString());
+            //int GrupoBase = 282; //Antecedentes
+            //GrupoEtario = new ServiceBL().ObtenerIdGrupoEtarioDePaciente(_age);
+            //int Grupo = int.Parse(GrupoBase.ToString() + GrupoEtario.ToString());
 
-            List<frmEsoAntecedentesPadre> AntecedentesActuales = new ServiceBL().ObtenerEsoAntecedentesPorGrupoId(Grupo, GrupoEtario, _personId);
+            //List<frmEsoAntecedentesPadre> AntecedentesActuales = new ServiceBL().ObtenerEsoAntecedentesPorGrupoId(Grupo, GrupoEtario, _personId);
 
-            if (AntecedentesActuales.Count == 0)
-            {
-                btnGuardarAntecedentes.Visible = false;
-                label58.Visible = false;
-                ultraAntActuales.Visible = false;
-            }
-            else
-            {
-                ultraAntActuales.DataSource = AntecedentesActuales;
-                ultraAntActuales.DisplayLayout.Bands[0].Columns[0].CellActivation = Infragistics.Win.UltraWinGrid.Activation.Disabled;
-            }
+            //if (AntecedentesActuales.Count == 0)
+            //{
+            //    btnGuardarAntecedentes.Visible = false;
+            //    label58.Visible = false;
+            //    ultraAntActuales.Visible = false;
+            //}
+            //else
+            //{
+            //    ultraAntActuales.DataSource = AntecedentesActuales;
+            //    ultraAntActuales.DisplayLayout.Bands[0].Columns[0].CellActivation = Infragistics.Win.UltraWinGrid.Activation.Disabled;
+            //}
 
-            int GrupoEtarioAnterior = 0;
+            //int GrupoEtarioAnterior = 0;
 
-            switch (GrupoEtario)
-            {
-                case 1:
-                    {
-                        GrupoEtarioAnterior = 1;
-                        break;
-                    }
-                case 2:
-                    {
-                        GrupoEtarioAnterior = 2;
-                        break;
-                    }
-                case 3:
-                    {
-                        GrupoEtarioAnterior = 3;
-                        break;
-                    }
-                case 4:
-                    {
-                        GrupoEtarioAnterior = 4;
-                        break;
-                    }
-                default:
-                    {
-                        GrupoEtarioAnterior = 0;
-                        break;
-                    }
-            }
-            Grupo = int.Parse(GrupoBase.ToString() + GrupoEtarioAnterior.ToString());
-            List<frmEsoAntecedentesPadre> AntecedentesAnteriores = new ServiceBL().ObtenerEsoAntecedentesPorGrupoId(Grupo, GrupoEtarioAnterior, _personId);
+            //switch (GrupoEtario)
+            //{
+            //    case 1:
+            //        {
+            //            GrupoEtarioAnterior = 1;
+            //            break;
+            //        }
+            //    case 2:
+            //        {
+            //            GrupoEtarioAnterior = 2;
+            //            break;
+            //        }
+            //    case 3:
+            //        {
+            //            GrupoEtarioAnterior = 3;
+            //            break;
+            //        }
+            //    case 4:
+            //        {
+            //            GrupoEtarioAnterior = 4;
+            //            break;
+            //        }
+            //    default:
+            //        {
+            //            GrupoEtarioAnterior = 0;
+            //            break;
+            //        }
+            //}
+            //Grupo = int.Parse(GrupoBase.ToString() + GrupoEtarioAnterior.ToString());
+            //List<frmEsoAntecedentesPadre> AntecedentesAnteriores = new ServiceBL().ObtenerEsoAntecedentesPorGrupoId(Grupo, GrupoEtarioAnterior, _personId);
 
-            if (AntecedentesAnteriores.Count == 0)
-            {
-                label39.Visible = false;
-                ultraAntAnteriores.Visible = false;
-            }
-            else
-            {
-                ultraAntAnteriores.DataSource = AntecedentesAnteriores;
-            }
+            //if (AntecedentesAnteriores.Count == 0)
+            //{
+            //    label39.Visible = false;
+            //    ultraAntAnteriores.Visible = false;
+            //}
+            //else
+            //{
+            //    ultraAntAnteriores.DataSource = AntecedentesAnteriores;
+            //}
         }
 
         private void ConstruirFormularioCuidadosPreventivos()
@@ -5221,7 +5225,8 @@ namespace Sigesoft.Node.WinClient.UI.Operations
         {
             
             GrabarAsync();
-            
+            GrabarDiagnosticos();
+
 
             #region Old
 
@@ -5275,6 +5280,7 @@ namespace Sigesoft.Node.WinClient.UI.Operations
 
                 if (!validacionAuditado())
                 {
+                    #region COmentado
                     //if (int.Parse(cbEstadoComponente.SelectedValue.ToString()) ==
                     //    (int)ServiceComponentStatus.Auditado && _profesionId == 30) //evaluador
                     //{
@@ -5283,54 +5289,21 @@ namespace Sigesoft.Node.WinClient.UI.Operations
                     //        MessageBoxButtons.OK, MessageBoxIcon.Question);
                     //    return;
                     //}
+                    #endregion
                     var respuesta = MessageBox.Show("¿Está seguro de grabar este registro?", "CONFIRMACIÓN!",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (respuesta == DialogResult.Yes)
                     {
                         IniciarGrabadoAsincrono(tcExamList.SelectedTab.TabPage);
-                        GrabarDiagnosticos();
                         _isChangeValue = false;
                     }
                 }
             }
         }
-
-        private bool validacionAuditado()
-        {
-            if (int.Parse(cbEstadoComponente.SelectedValue.ToString()) == (int)ServiceComponentStatus.Auditado && _profesionId == 30)//evaluador
-            {
-                MessageBox.Show("El examen ya fue AUDITADO, no puede guardar los cambios.", "CONFIRMACIÓN!", MessageBoxButtons.OK, MessageBoxIcon.Question);
-                return true;
-            }
-            return false;
-        }
-
-        private void IniciarGrabadoAsincrono(Infragistics.Win.UltraWinTabControl.UltraTabPageControl ultraTabPageControl)
-        {
-            _serviceComponentFieldsList = new List<ServiceComponentFieldsList>();
-            ProcessControlBySelectedTab_AMC(ultraTabPageControl);
-
-            DataEso oDataEso = new DataEso();
-            oDataEso.categoria = ultraTabPageControl.Tab.Text;
-            if (ultraTabPageControl.Tab.Text == "MEDICINA")
-            {
-                ServiceBL.SaveServiceUserId(Globals.ClientSession.i_SystemUserId,_serviceId);
-            }
-            ServiceBL.SaveServiceComponentUserType(Globals.ClientSession.i_SystemUserId, _serviceComponentId);
-            oDataEso.v_ServiceId = _serviceId;
-            oDataEso.v_PersonId = _personId;
-            oDataEso.v_ServiceComponentId = _serviceComponentId;
-            oDataEso.Estado = "En espera";
-            oDataEso.NroIntentos = "----";
-            oDataEso.datos = _serviceComponentFieldsList;
-            OpenFormProcesoEso(oDataEso);
-
-        }
-
         private void GrabarDiagnosticos()
         {
             OperationResult objOperationResult = new OperationResult();
-            int? systemUserSuplantadorId = 0;
+            int systemUserSuplantadorId = 0;
 
             #region Capturar [Comentarios, estado, procedencia de un exmanen componente]
 
@@ -5367,143 +5340,299 @@ namespace Sigesoft.Node.WinClient.UI.Operations
 
                 if (frm.DialogResult != System.Windows.Forms.DialogResult.Cancel)
                 {
-                    systemUserSuplantadorId = frm.i_SystemUserSuplantadorId;
+                    systemUserSuplantadorId = (int)frm.i_SystemUserSuplantadorId;
+                    UpdateServiceComponent(serviceComponentDto.v_ServiceComponentId, systemUserSuplantadorId);
                 }
             }
-            var t = new Thread(() =>
+            else
             {
-                using (new LoadingClass.PleaseWait(this.Location, "Grabando..."))
-                {
-                    Thread.Sleep(2500);
-                    MessageBox.Show("Se grabó correctamente.", "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                };
-                ;
-            });
-            t.Start();
-            
+                LogicaApprovedUpdateUserId(serviceComponentDto, Globals.ClientSession.i_SystemUserId, _profesionId);
+            }
+
             #region GRABAR DATOS ADICIONALES COMO [Diagnósticos + restricciones + recomendaciones]
-
-            // Grabar Dx por examen componente mas sus restricciones
-            
-            var usuarioActual = Globals.ClientSession.i_SystemUserId;
-
-            //PRUEBA
-            string usuario_ = "";
-            if (lblUsuGraba.Text == "Usuario Crea : sa")
-                usuario_ = lblUsuGraba.Text.Split(':')[1].TrimStart();
-            else
-                usuario_ = lblUsuGraba.Text;
-            usuario_ = usuario_.ToLower();
-            var usuario_data = new ServiceBL().GetSystemUser(usuario_);
-            var usuario_professional = new ServiceBL().GetProfessional(usuario_data.v_PersonId);
-            if (systemUserSuplantadorId != null && systemUserSuplantadorId != 0)
+            using (new LoadingClass.PleaseWait(this.Location, "Grabando..."))
             {
-                Globals.ClientSession.i_SystemUserId = (int)systemUserSuplantadorId;
-            }
-            else if (_profesionId == 30 || _profesionId == 32 || _profesionId == 34) // evaluador y evaluador auditor // especialista
-            {
-                if (usuario_data.i_SystemUserId != usuarioActual)
-                {
-                    if (_profesionId == 32 && usuario_data.i_SystemUserId == 11)
-                    {
-                        Globals.ClientSession.i_SystemUserId = Globals.ClientSession.i_SystemUserCopyId;
-                    }
-                    else if (_profesionId == 32 && (usuario_professional.i_ProfessionId == 31 || usuario_professional.i_ProfessionId == 33))
-                    {
-                        Globals.ClientSession.i_SystemUserId = Globals.ClientSession.i_SystemUserCopyId;
-                    }
-                    else if (_profesionId == 32 && (usuario_professional.i_ProfessionId == 32 || usuario_professional.i_ProfessionId == 30 || usuario_professional.i_ProfessionId == 34))
-                    {
-                        Globals.ClientSession.i_SystemUserId = usuario_data.i_SystemUserId;
-                    }
-                    else if (_profesionId == 30 && usuario_data.i_SystemUserId == 11)
-                    {
-                        Globals.ClientSession.i_SystemUserId = Globals.ClientSession.i_SystemUserCopyId;
-                    }
-                    else if (_profesionId == 30 && (usuario_professional.i_ProfessionId == 31 || usuario_professional.i_ProfessionId == 33))
-                    {
-                        Globals.ClientSession.i_SystemUserId = Globals.ClientSession.i_SystemUserCopyId;
-                    }
-                    else if (_profesionId == 30 && (usuario_professional.i_ProfessionId == 32 || usuario_professional.i_ProfessionId == 30 || usuario_professional.i_ProfessionId == 34))
-                    {
-                        Globals.ClientSession.i_SystemUserId = usuario_data.i_SystemUserId;
-                    }
-                    else if (_profesionId == 34 && usuario_data.i_SystemUserId == 11)
-                    {
-                        Globals.ClientSession.i_SystemUserId = Globals.ClientSession.i_SystemUserCopyId;
-                    }
-                    else if (_profesionId == 34 && (usuario_professional.i_ProfessionId == 31 || usuario_professional.i_ProfessionId == 33))
-                    {
-                        Globals.ClientSession.i_SystemUserId = Globals.ClientSession.i_SystemUserCopyId;
-                    }
-                    else if (_profesionId == 34 && (usuario_professional.i_ProfessionId == 32 || usuario_professional.i_ProfessionId == 30 || usuario_professional.i_ProfessionId == 34))
-                    {
-                        Globals.ClientSession.i_SystemUserId = Globals.ClientSession.i_SystemUserCopyId;
-                    }
-                    else
-                    {
-                        Globals.ClientSession.i_SystemUserId = usuario_data.i_SystemUserId;
-                    }
-                }
-                else
-                {
-                    Globals.ClientSession.i_SystemUserId = Globals.ClientSession.i_SystemUserCopyId;
-                }
-            }
-            else if (_profesionId == 31 || _profesionId == 33)//auditor y tecnicos
-            {
-                if ((_profesionId == 31 || _profesionId == 33) && usuario_data.i_SystemUserId == 11)
-                {
-                    Globals.ClientSession.i_SystemUserId = Globals.ClientSession.i_SystemUserCopyId;
-                }
-                else
-                {
-                    Globals.ClientSession.i_SystemUserId = usuario_data.i_SystemUserId;
-                }
-            }
-            //else if (usuario_data.i_SystemUserId != oldUser)
-            //{
-            //    if (usuario_data.i_SystemUserId == 11)
-            //    {
-            //        Globals.ClientSession.i_SystemUserId = Globals.ClientSession.i_SystemUserCopyId;
-            //    }
-            //    else
-            //    {
-            //        Globals.ClientSession.i_SystemUserId = usuario_data.i_SystemUserId;
-            //    }
-            //}
-            else
-            {
-                Globals.ClientSession.i_SystemUserId = Globals.ClientSession.i_SystemUserCopyId;
-            }
-
-            _serviceBL.AddDiagnosticRepository(ref objOperationResult,
-                                               _tmpExamDiagnosticComponentList,
-                                                serviceComponentDto,
-                                                Globals.ClientSession.GetAsList(),
-                                                _chkApprovedEnabled, chkUtilizarFirma.Checked);
+                _serviceBL.AddDiagnosticRepository(ref objOperationResult,
+                    _tmpExamDiagnosticComponentList,
+                    serviceComponentDto,
+                    Globals.ClientSession.GetAsList(),
+                    _chkApprovedEnabled, chkUtilizarFirma.Checked);
 
 
-            _serviceComponentFieldsList = null;
-            _tmpListValuesOdontograma = null;
+                _serviceComponentFieldsList = null;
+                _tmpListValuesOdontograma = null;
             #endregion
 
-            #region refrescar
+                #region refrescar
 
-            flagValueChange = false;
-            InitializeData();
-            //LoadDataBySelectedComponent_New(_componentId);
-            LoadDataBySelectedComponent_Async(_componentId);
-            GetTotalDiagnosticsForGridView();
-            ConclusionesyTratamiento_LoadAllGrid();
+                flagValueChange = false;
+                InitializeData();
+                //LoadDataBySelectedComponent_New(_componentId);
+                LoadDataBySelectedComponent_Async(_componentId);
+                GetTotalDiagnosticsForGridView();
+                ConclusionesyTratamiento_LoadAllGrid();
+            };
 
 
 
-            #endregion
 
-            Globals.ClientSession.i_SystemUserId = usuarioActual;
+                #endregion
+
+
 
         }
+        private void LogicaApprovedUpdateUserId(servicecomponentDto serviceComponentDto, int userId, int _profesionId)
+        {
+            int[] userOld = new int[2];
+            userOld = ObtenerUsuarioAnterior(serviceComponentDto.v_ServiceComponentId);
+            bool SiGraba = false;
+            if (_profesionId == (int)TipoProfesional.Evaluador_No_Medico && userOld[0] == 0 || userOld[0] == userId)
+            {
+                SiGraba = true;
+            }
+            else if (_profesionId == (int)TipoProfesional.Especialista && (userOld[0] == 0 || userOld[1] == (int)TipoProfesional.Evaluador_No_Medico || userOld[1] == (int)TipoProfesional.Evaluador || userOld[1] == (int)TipoProfesional.Auditor_Evaluador) || userOld[0] == userId)
+            {
+                SiGraba = true;
+            }
+            else if (_profesionId == (int)TipoProfesional.Evaluador && (userOld[0] == 0 || userOld[1] == (int)TipoProfesional.Evaluador_No_Medico) || userOld[0] == userId)
+            {
+                SiGraba = true;
+            }
+            else if (_profesionId == (int)TipoProfesional.Auditor_Evaluador && (userOld[0] == 0 || userOld[1] == (int)TipoProfesional.Evaluador_No_Medico) || userOld[0] == userId)
+            {
+                SiGraba = true;
+            }
+            if (SiGraba)
+            {
+                UpdateServiceComponent(serviceComponentDto.v_ServiceComponentId, userId);
+            }
+
+        }
+        private int[] ObtenerUsuarioAnterior(string v_ServiceComponentId)
+        {
+            //ARNOLD STORE
+
+            var respt = new ServiceBL().ObtenerUsuarioAnteriorDB(v_ServiceComponentId);
+            int[] userId = new int[2];
+
+            userId[0] = respt.userId1;
+            userId[1] = respt.userId2;
+
+            return userId;
+        }
+        private void UpdateServiceComponent(string v_ServiceComponentId, int userId)
+        {
+            var respt = new ServiceBL().UpdateServiceComponentDB(v_ServiceComponentId, userId);
+        }
+        private bool validacionAuditado()
+        {
+            if (int.Parse(cbEstadoComponente.SelectedValue.ToString()) == (int)ServiceComponentStatus.Auditado && _profesionId == 30)//evaluador
+            {
+                MessageBox.Show("El examen ya fue AUDITADO, no puede guardar los cambios.", "CONFIRMACIÓN!", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                return true;
+            }
+            return false;
+        }
+
+        private void IniciarGrabadoAsincrono(Infragistics.Win.UltraWinTabControl.UltraTabPageControl ultraTabPageControl)
+        {
+            _serviceComponentFieldsList = new List<ServiceComponentFieldsList>();
+            ProcessControlBySelectedTab_AMC(ultraTabPageControl);
+
+            DataEso oDataEso = new DataEso();
+            oDataEso.categoria = ultraTabPageControl.Tab.Text;
+            if (ultraTabPageControl.Tab.Text == "MEDICINA")
+            {
+                ServiceBL.SaveServiceUserId(Globals.ClientSession.i_SystemUserId,_serviceId);
+            }
+            ServiceBL.SaveServiceComponentUserType(Globals.ClientSession.i_SystemUserId, _serviceComponentId);
+            oDataEso.v_ServiceId = _serviceId;
+            oDataEso.v_PersonId = _personId;
+            oDataEso.v_ServiceComponentId = _serviceComponentId;
+            oDataEso.Estado = "En espera";
+            oDataEso.NroIntentos = "----";
+            oDataEso.datos = _serviceComponentFieldsList;
+            OpenFormProcesoEso(oDataEso);
+
+        }
+
+        //private void GrabarDiagnosticos()
+        //{
+        //    OperationResult objOperationResult = new OperationResult();
+        //    int? systemUserSuplantadorId = 0;
+
+        //    #region Capturar [Comentarios, estado, procedencia de un exmanen componente]
+
+        //    var serviceComponentDto = new servicecomponentDto();
+        //    serviceComponentDto.v_ServiceComponentId = _serviceComponentId;
+        //    //Obtener fecha de Actualizacion
+        //    var FechaUpdate = _serviceBL.GetServiceComponent(ref objOperationResult, _serviceComponentId).d_UpdateDate;
+        //    serviceComponentDto.v_Comment = txtComentario.Text;
+        //    //grabar estado del examen según profesión del usuario
+        //    if (_profesionId == 30) // evaluador
+        //    {
+        //        serviceComponentDto.i_ServiceComponentStatusId = (int)ServiceComponentStatus.Evaluado;
+        //        _EstadoComponente = (int)ServiceComponentStatus.Evaluado;
+        //    }
+        //    else if (_profesionId == 31 || _profesionId == 32)//auditor
+        //    {
+        //        serviceComponentDto.i_ServiceComponentStatusId = (int)ServiceComponentStatus.Auditado;
+        //        _EstadoComponente = (int)ServiceComponentStatus.Auditado;
+        //    }
+        //    serviceComponentDto.i_ServiceComponentStatusId = int.Parse(cbEstadoComponente.SelectedValue.ToString());
+        //    _EstadoComponente = int.Parse(cbEstadoComponente.SelectedValue.ToString());
+        //    serviceComponentDto.i_ExternalInternalId = int.Parse(cbTipoProcedenciaExamen.SelectedValue.ToString());
+        //    serviceComponentDto.i_IsApprovedId = Convert.ToInt32(chkApproved.Checked);
+
+        //    serviceComponentDto.v_ComponentId = _componentId;
+        //    serviceComponentDto.v_ServiceId = _serviceId;
+        //    serviceComponentDto.d_UpdateDate = FechaUpdate;
+        //    #endregion
+
+        //    if (chkUtilizarFirma.Checked)
+        //    {
+        //        var frm = new Popups.frmSelectSignature();
+        //        frm.ShowDialog();
+
+        //        if (frm.DialogResult != System.Windows.Forms.DialogResult.Cancel)
+        //        {
+        //            systemUserSuplantadorId = frm.i_SystemUserSuplantadorId;
+        //        }
+        //    }
+        //    var t = new Thread(() =>
+        //    {
+        //        using (new LoadingClass.PleaseWait(this.Location, "Grabando..."))
+        //        {
+        //            Thread.Sleep(2500);
+        //            MessageBox.Show("Se grabó correctamente.", "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //        };
+        //        ;
+        //    });
+        //    t.Start();
+            
+        //    #region GRABAR DATOS ADICIONALES COMO [Diagnósticos + restricciones + recomendaciones]
+
+        //    // Grabar Dx por examen componente mas sus restricciones
+            
+        //    var usuarioActual = Globals.ClientSession.i_SystemUserId;
+
+        //    //PRUEBA
+        //    string usuario_ = "";
+        //    if (lblUsuGraba.Text == "Usuario Crea : sa")
+        //        usuario_ = lblUsuGraba.Text.Split(':')[1].TrimStart();
+        //    else
+        //        usuario_ = lblUsuGraba.Text;
+        //    usuario_ = usuario_.ToLower();
+        //    var usuario_data = new ServiceBL().GetSystemUser(usuario_);
+        //    var usuario_professional = new ServiceBL().GetProfessional(usuario_data.v_PersonId);
+        //    if (systemUserSuplantadorId != null && systemUserSuplantadorId != 0)
+        //    {
+        //        Globals.ClientSession.i_SystemUserId = (int)systemUserSuplantadorId;
+        //    }
+        //    else if (_profesionId == 30 || _profesionId == 32 || _profesionId == 34) // evaluador y evaluador auditor // especialista
+        //    {
+        //        if (usuario_data.i_SystemUserId != usuarioActual)
+        //        {
+        //            if (_profesionId == 32 && usuario_data.i_SystemUserId == 11)
+        //            {
+        //                Globals.ClientSession.i_SystemUserId = Globals.ClientSession.i_SystemUserCopyId;
+        //            }
+        //            else if (_profesionId == 32 && (usuario_professional.i_ProfessionId == 31 || usuario_professional.i_ProfessionId == 33))
+        //            {
+        //                Globals.ClientSession.i_SystemUserId = Globals.ClientSession.i_SystemUserCopyId;
+        //            }
+        //            else if (_profesionId == 32 && (usuario_professional.i_ProfessionId == 32 || usuario_professional.i_ProfessionId == 30 || usuario_professional.i_ProfessionId == 34))
+        //            {
+        //                Globals.ClientSession.i_SystemUserId = usuario_data.i_SystemUserId;
+        //            }
+        //            else if (_profesionId == 30 && usuario_data.i_SystemUserId == 11)
+        //            {
+        //                Globals.ClientSession.i_SystemUserId = Globals.ClientSession.i_SystemUserCopyId;
+        //            }
+        //            else if (_profesionId == 30 && (usuario_professional.i_ProfessionId == 31 || usuario_professional.i_ProfessionId == 33))
+        //            {
+        //                Globals.ClientSession.i_SystemUserId = Globals.ClientSession.i_SystemUserCopyId;
+        //            }
+        //            else if (_profesionId == 30 && (usuario_professional.i_ProfessionId == 32 || usuario_professional.i_ProfessionId == 30 || usuario_professional.i_ProfessionId == 34))
+        //            {
+        //                Globals.ClientSession.i_SystemUserId = usuario_data.i_SystemUserId;
+        //            }
+        //            else if (_profesionId == 34 && usuario_data.i_SystemUserId == 11)
+        //            {
+        //                Globals.ClientSession.i_SystemUserId = Globals.ClientSession.i_SystemUserCopyId;
+        //            }
+        //            else if (_profesionId == 34 && (usuario_professional.i_ProfessionId == 31 || usuario_professional.i_ProfessionId == 33))
+        //            {
+        //                Globals.ClientSession.i_SystemUserId = Globals.ClientSession.i_SystemUserCopyId;
+        //            }
+        //            else if (_profesionId == 34 && (usuario_professional.i_ProfessionId == 32 || usuario_professional.i_ProfessionId == 30 || usuario_professional.i_ProfessionId == 34))
+        //            {
+        //                Globals.ClientSession.i_SystemUserId = Globals.ClientSession.i_SystemUserCopyId;
+        //            }
+        //            else
+        //            {
+        //                Globals.ClientSession.i_SystemUserId = usuario_data.i_SystemUserId;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            Globals.ClientSession.i_SystemUserId = Globals.ClientSession.i_SystemUserCopyId;
+        //        }
+        //    }
+        //    else if (_profesionId == 31 || _profesionId == 33)//auditor y tecnicos
+        //    {
+        //        if ((_profesionId == 31 || _profesionId == 33) && usuario_data.i_SystemUserId == 11)
+        //        {
+        //            Globals.ClientSession.i_SystemUserId = Globals.ClientSession.i_SystemUserCopyId;
+        //        }
+        //        else
+        //        {
+        //            Globals.ClientSession.i_SystemUserId = usuario_data.i_SystemUserId;
+        //        }
+        //    }
+        //    //else if (usuario_data.i_SystemUserId != oldUser)
+        //    //{
+        //    //    if (usuario_data.i_SystemUserId == 11)
+        //    //    {
+        //    //        Globals.ClientSession.i_SystemUserId = Globals.ClientSession.i_SystemUserCopyId;
+        //    //    }
+        //    //    else
+        //    //    {
+        //    //        Globals.ClientSession.i_SystemUserId = usuario_data.i_SystemUserId;
+        //    //    }
+        //    //}
+        //    else
+        //    {
+        //        Globals.ClientSession.i_SystemUserId = Globals.ClientSession.i_SystemUserCopyId;
+        //    }
+
+        //    _serviceBL.AddDiagnosticRepository(ref objOperationResult,
+        //                                       _tmpExamDiagnosticComponentList,
+        //                                        serviceComponentDto,
+        //                                        Globals.ClientSession.GetAsList(),
+        //                                        _chkApprovedEnabled, chkUtilizarFirma.Checked);
+
+
+        //    _serviceComponentFieldsList = null;
+        //    _tmpListValuesOdontograma = null;
+        //    #endregion
+
+        //    #region refrescar
+
+        //    flagValueChange = false;
+        //    InitializeData();
+        //    //LoadDataBySelectedComponent_New(_componentId);
+        //    LoadDataBySelectedComponent_Async(_componentId);
+        //    GetTotalDiagnosticsForGridView();
+        //    ConclusionesyTratamiento_LoadAllGrid();
+
+
+
+        //    #endregion
+
+        //    Globals.ClientSession.i_SystemUserId = usuarioActual;
+
+        //}
 
         private void SaveExamBySelectedTab(Infragistics.Win.UltraWinTabControl.UltraTabPageControl selectedTab)
         {

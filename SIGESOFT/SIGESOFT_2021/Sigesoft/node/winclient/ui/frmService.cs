@@ -3180,30 +3180,42 @@ namespace Sigesoft.Node.WinClient.UI
 
                         return;
                     }
+                    else
+                    {
+                        var dni = grdDataService.Selected.Rows[0].Cells["v_DocNumber"].Value.ToString();
+                        var pacientName = grdDataService.Selected.Rows[0].Cells["v_Pacient"].Value.ToString();
+                        var frm = new Reports.frmManagementReports_Async(_serviceId, _EmpresaClienteId, _pacientId,
+                            _customerOrganizationName, dni, pacientName);
+                        frm.ShowDialog();
+                    }
 
                 }
-
-                int flagPantalla =
-                    int.Parse(grdDataService.Selected.Rows[0].Cells["i_MasterServiceId"].Value
-                        .ToString()); // int.Parse(ddlServiceTypeId.SelectedValue.ToString());
-                int eso = 1;
-                if (flagPantalla == 2)
+                else
                 {
                     var dni = grdDataService.Selected.Rows[0].Cells["v_DocNumber"].Value.ToString();
                     var pacientName = grdDataService.Selected.Rows[0].Cells["v_Pacient"].Value.ToString();
                     var frm = new Reports.frmManagementReports_Async(_serviceId, _EmpresaClienteId, _pacientId,
                         _customerOrganizationName, dni, pacientName);
-                    frm.ShowDialog();
+                    frm.ShowDialog(); 
                 }
-                else
-                {
-                    MessageBox.Show("Este botón es para exmámenes médicos ocupácionales",
-                        "INFORMACIÓN!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //var edad = int.Parse(grdDataService.Selected.Rows[0].Cells["i_age"].Value.ToString());
-                    //var frm = new Reports.frmManagementReportsMedical(_serviceId, _pacientId, _customerOrganizationName,
-                    //    _personFullName, _EmpresaClienteId, edad);
-                    //frm.ShowDialog();
-                }
+
+                //int flagPantalla =
+                //    int.Parse(grdDataService.Selected.Rows[0].Cells["i_MasterServiceId"].Value
+                //        .ToString()); // int.Parse(ddlServiceTypeId.SelectedValue.ToString());
+                //int eso = 1;
+                //if (flagPantalla == 2)
+                //{
+                   
+                //}
+                //else
+                //{
+                //    MessageBox.Show("Este botón es para exmámenes médicos ocupácionales",
+                //        "INFORMACIÓN!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //    //var edad = int.Parse(grdDataService.Selected.Rows[0].Cells["i_age"].Value.ToString());
+                //    //var frm = new Reports.frmManagementReportsMedical(_serviceId, _pacientId, _customerOrganizationName,
+                //    //    _personFullName, _EmpresaClienteId, edad);
+                //    //frm.ShowDialog();
+                //}
 
             }
             catch (Exception ex)

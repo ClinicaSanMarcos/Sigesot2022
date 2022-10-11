@@ -2461,7 +2461,7 @@
             this.tpExam.Location = new System.Drawing.Point(4, 22);
             this.tpExam.Name = "tpExam";
             this.tpExam.Padding = new System.Windows.Forms.Padding(3);
-            this.tpExam.Size = new System.Drawing.Size(1310, 557);
+            this.tpExam.Size = new System.Drawing.Size(1310, 564);
             this.tpExam.TabIndex = 1;
             this.tpExam.Text = "EXÁMENES";
             this.tpExam.ToolTipText = "EXAMENES";
@@ -2485,8 +2485,8 @@
             this.splitContainer2.Panel2.Controls.Add(this.groupBox4);
             this.splitContainer2.Panel2.Controls.Add(this.gbDiagnosticoExamen);
             this.splitContainer2.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer2_Panel2_Paint);
-            this.splitContainer2.Size = new System.Drawing.Size(1303, 564);
-            this.splitContainer2.SplitterDistance = 394;
+            this.splitContainer2.Size = new System.Drawing.Size(1303, 571);
+            this.splitContainer2.SplitterDistance = 355;
             this.splitContainer2.TabIndex = 59;
             // 
             // tcExamList
@@ -2499,7 +2499,7 @@
             this.tcExamList.Location = new System.Drawing.Point(0, 0);
             this.tcExamList.Name = "tcExamList";
             this.tcExamList.SharedControlsPage = this.ultraTabSharedControlsPage1;
-            this.tcExamList.Size = new System.Drawing.Size(1300, 396);
+            this.tcExamList.Size = new System.Drawing.Size(1300, 357);
             this.tcExamList.Style = Infragistics.Win.UltraWinTabControl.UltraTabControlStyle.VisualStudio2005;
             this.tcExamList.TabIndex = 1;
             this.tcExamList.TabOrientation = Infragistics.Win.UltraWinTabs.TabOrientation.LeftTop;
@@ -2513,7 +2513,7 @@
             this.ultraTabSharedControlsPage1.Font = new System.Drawing.Font("Microsoft Tai Le", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ultraTabSharedControlsPage1.Location = new System.Drawing.Point(20, 1);
             this.ultraTabSharedControlsPage1.Name = "ultraTabSharedControlsPage1";
-            this.ultraTabSharedControlsPage1.Size = new System.Drawing.Size(1279, 394);
+            this.ultraTabSharedControlsPage1.Size = new System.Drawing.Size(1279, 355);
             this.ultraTabSharedControlsPage1.MouseLeave += new System.EventHandler(this.ultraTabSharedControlsPage1_MouseLeave);
             // 
             // groupBox4
@@ -3817,7 +3817,7 @@
             this.tcSubMain.Location = new System.Drawing.Point(0, 0);
             this.tcSubMain.Name = "tcSubMain";
             this.tcSubMain.SelectedIndex = 0;
-            this.tcSubMain.Size = new System.Drawing.Size(1318, 583);
+            this.tcSubMain.Size = new System.Drawing.Size(1318, 590);
             this.tcSubMain.TabIndex = 4;
             this.tcSubMain.Tag = "";
             this.tcSubMain.SelectedIndexChanged += new System.EventHandler(this.tcSubMain_SelectedIndexChanged);
@@ -7597,7 +7597,7 @@
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel6.Controls.Add(this.tableLayoutPanel7, 0, 0);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 569);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 576);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 1;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -7898,7 +7898,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1318, 624);
+            this.ClientSize = new System.Drawing.Size(1318, 631);
             this.Controls.Add(this.tableLayoutPanel6);
             this.Controls.Add(this.tcSubMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

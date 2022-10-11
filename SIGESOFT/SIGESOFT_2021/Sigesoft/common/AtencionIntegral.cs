@@ -8,6 +8,7 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.draw;
 using Sigesoft.Node.WinClient.BE;
+using Sigesoft.Node.WinClient.BE.Custom;
 
 namespace NetPdf
 {
@@ -31,9 +32,12 @@ namespace NetPdf
             Adulto datosAdult,
             List<Embarazo> listEmbarazos,
             AdultoMayor datosAdultMay,
-            List<DiagnosticRepositoryList> Diagnosticos, List<recetadespachoDto> medicina, 
+            List<DiagnosticRepositoryList> Diagnosticos, List<recetadespachoDto> medicina,
             List<ServiceComponentList> ExamenesServicio, MedicoTratanteAtenciones medicoo,
-            UsuarioGrabo DatosGrabo)
+            UsuarioGrabo DatosGrabo, List<Categoria> DataSource, List<AdditionalExamCustom> ListAdditional,
+            string edadActual, List<FamilyMedicalAntecedentsList> listaPatologicosFamiliares,
+            List<PersonMedicalHistoryList> listMedicoPersonales,
+            List<NoxiousHabitsList> listaHabitoNocivos)
         {
             Document document = new Document(PageSize.A4, 30f, 30f, 45f, 41f);
 
@@ -2957,9 +2961,13 @@ namespace NetPdf
             {
                 if (DatosGrabo.Firma != null)
                     cellFirma = new PdfPCell(HandlingItextSharp.GetImage(DatosGrabo.Firma, null, null, 120, 50)) { HorizontalAlignment = PdfPCell.ALIGN_CENTER };
+                else
+                    cellFirma = new PdfPCell(new Phrase(" ", fontColumnValue));
             }
             else
+            {
                 cellFirma = new PdfPCell(new Phrase(" ", fontColumnValue));
+            }
 
             cellFirma.HorizontalAlignment = Element.ALIGN_CENTER;
             cellFirma.VerticalAlignment = Element.ALIGN_MIDDLE;

@@ -624,7 +624,8 @@ namespace Sigesoft.Common
         Clinica = 21,
         Psicosensometrico = 22,
 
-        Ecografia = 24
+        Ecografia = 24,
+        ConsultorioExternoYEmergencia = 30
 
     }
 

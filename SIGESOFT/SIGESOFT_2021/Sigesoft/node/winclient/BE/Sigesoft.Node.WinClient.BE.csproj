@@ -487,6 +487,8 @@
     <Compile Include="Generated\facturacionDto.cs" />
     <Compile Include="Generated\especialityDto.cs" />
     <Compile Include="Generated\envionatclarDto.cs" />
+    <Compile Include="Generated\updateservicecomponent2_spResultDto.cs" />
+    <Compile Include="Generated\updateservicecomponent1_spResultDto.cs" />
     <Compile Include="Generated\resumentipopagoResultDto.cs" />
     <Compile Include="Generated\resumentipoempresaResultDto.cs" />
     <Compile Include="Generated\reportegerencialResultDto.cs" />
@@ -495,6 +497,7 @@
     <Compile Include="Generated\obtenerproductoResultDto.cs" />
     <Compile Include="Generated\obtenerpreciotarifarioResultDto.cs" />
     <Compile Include="Generated\obtenernetoporcobrarResultDto.cs" />
+    <Compile Include="Generated\getobtenerusuarioanterior_spResultDto.cs" />
     <Compile Include="Generated\gerenciatipopagoResultDto.cs" />
     <Compile Include="Generated\gerenciatipoexamenResultDto.cs" />
     <Compile Include="Generated\gerenciacreditoResultDto.cs" />

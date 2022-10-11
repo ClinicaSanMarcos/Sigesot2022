@@ -18,11 +18,14 @@ using Infragistics.Win.UltraWinSchedule;
 using System.Threading.Tasks;
 using Microsoft.Vbe.Interop;
 using Application = System.Windows.Forms.Application;
+using Sigesoft.Node.Contasol.Integration;
 
 namespace Sigesoft.Node.WinClient.UI.Reports
 {
     public class LogicReports
     {
+        RecetaBl objRecetaBl = new RecetaBl();
+
         ServiceBL _serviceBL = new ServiceBL();
         private string _customerOrganizationName;
         OrganizationBL _organizationBL = new OrganizationBL();
@@ -3155,6 +3158,10 @@ namespace Sigesoft.Node.WinClient.UI.Reports
                     GenerateInformeMedicoTrabajadorInternacional(string.Format("{0}.pdf", Path.Combine(_ruta, _serviceId + "-" + Constants.INFORME_FICHA_MEDICA_TRABAJADOR_CI)), _serviceId, _pacientId);
                     _filesNameToMerge.Add(string.Format("{0}.pdf", Path.Combine(_ruta, _serviceId + "-" + componentId)));
                     break;
+                case Constants.ATENCION_INTEGRAL:
+                    GenerateAtencionIntegral(string.Format("{0}.pdf", Path.Combine(_ruta, _serviceId + "-" + Constants.ATENCION_INTEGRAL)));
+                    _filesNameToMerge.Add(string.Format("{0}.pdf", Path.Combine(_ruta, _serviceId + "-" + componentId)));
+                    break;
                 default:
                     break;
             }
@@ -3165,6 +3172,119 @@ namespace Sigesoft.Node.WinClient.UI.Reports
 
 
         #region Methods
+
+        private void GenerateAtencionIntegral(string pathFile)
+        {
+            //var _DataService = _serviceBL.GetServiceReport(_serviceId);
+            // en esta variable va a traer todos los valores de los examenes
+            var exams = _serviceBL.GetServiceComponentsReport(_serviceId);
+            var datosP = _pacientBL.DevolverDatosPaciente(_serviceId);
+            var MedicalCenter = _serviceBL.GetInfoMedicalCenter();
+            int GrupoEtario = 0;
+            int Grupo = 0;
+            var listAntecedentes = _serviceBL.ObtenerEsoAntecedentesPorGrupoId(Grupo, GrupoEtario, _pacientId);
+            var datosNin = _pacientBL.DevolverNinio(_serviceId);
+            var datosAdol = _pacientBL.DevolverAdolescente(_serviceId);
+            var datosAdul = _pacientBL.DevolverAdulto(_serviceId);
+            var listEmb = _pacientBL.GetEmbarazos(_pacientId);
+            var datosAdulMay = _pacientBL.DevolverAdultoMayor(_serviceId);
+            var diagnosticRepository = _serviceBL.GetServiceComponentConclusionesDxServiceIdReport(_serviceId);
+            var medico = _pacientBL.ObtenerDatosMedicoMedicina(_serviceId, Constants.ATENCION_INTEGRAL_ID, Constants.ATENCION_INTEGRAL_ID);
+            var _ExamenesServicio = _serviceBL.GetServiceComponentsReport(_serviceId);
+            var medicina = objRecetaBl.GetReceta(_serviceId);
+            var medicoTratante = new ServiceBL().GetMedicoTratante(_serviceId);
+            var datosGrabo = new ServiceBL().DevolverDatosUsuarioGraboExamen((int)CategoryTypeExam.ConsultorioExternoYEmergencia, _serviceId);
+
+            List<Categoria> AdditionalExam = new List<Categoria>();
+            List<Categoria> DataSource = new List<Categoria>();
+            List<string> ComponentList = new List<string>();
+            var ListadditExam = new AdditionalExamBL().GetAdditionalExamByServiceId_Historia(_serviceId);
+
+            foreach (var componenyId in ListadditExam)
+            {
+                ComponentList.Add(componenyId.ComponentId);
+            }
+            OperationResult objOperationResult = new OperationResult();
+
+            foreach (var componentId in ComponentList)
+            {
+                var ListServiceComponent = new ServiceBL().GetAllComponents(ref objOperationResult, (int)TipoBusqueda.ComponentId, componentId);
+
+                Categoria categoria = DataSource.Find(x => x.i_CategoryId == ListServiceComponent[0].i_CategoryId);
+                if (categoria != null)
+                {
+                    List<ComponentDetailList> componentDetail = new List<ComponentDetailList>();
+                    componentDetail = ListServiceComponent[0].Componentes;
+                    DataSource.Find(x => x.i_CategoryId == ListServiceComponent[0].i_CategoryId).Componentes.AddRange(componentDetail);
+                }
+                else
+                {
+                    DataSource.AddRange(ListServiceComponent);
+                }
+            }
+            var añosCompleto = DiferenciaFechas(DateTime.Now, datosP.d_Birthdate.Value);
+
+            var _listaHabitoNocivos = _historyBL.GetNoxiousHabitsReport(_pacientId);
+            var _listaPatologicosFamiliares = _historyBL.GetFamilyMedicalAntecedentsReport(_pacientId);
+            var _listMedicoPersonales = _historyBL.GetPersonMedicalHistoryReport(_pacientId);
+
+
+            AtencionIntegral.CreateAtencionIntegral(pathFile, medico, datosP, listAntecedentes, MedicalCenter,
+                exams, datosNin, datosAdol, datosAdul, listEmb, datosAdulMay, diagnosticRepository, medicina,
+                _ExamenesServicio, medicoTratante, datosGrabo, DataSource, ListadditExam, añosCompleto,
+                _listaPatologicosFamiliares, _listMedicoPersonales, _listaHabitoNocivos);
+
+        }
+
+        private string DiferenciaFechas(DateTime newdt, DateTime olddt)
+        {
+            int anios;
+            int meses;
+            int dias;
+            string str = "";
+
+            anios = (newdt.Year - olddt.Year);
+            meses = (newdt.Month - olddt.Month);
+            dias = (newdt.Day - olddt.Day);
+
+            if (meses < 0)
+            {
+                anios -= 1;
+                meses += 12;
+            }
+            if (dias < 0)
+            {
+                meses -= 1;
+                dias += DateTime.DaysInMonth(newdt.Year, newdt.Month);
+            }
+
+            if (anios < 0)
+            {
+                return "La fecha inicial es mayor a la fecha final";
+            }
+            if (anios > 0)
+            {
+                if (anios == 1)
+                    str = str + anios.ToString() + " año ";
+                else
+                    str = str + anios.ToString() + " años ";
+            }
+            if (meses > 0)
+            {
+                if (meses == 1)
+                    str = str + meses.ToString() + " mes y ";
+                else
+                    str = str + meses.ToString() + " meses y ";
+            }
+            if (dias > 0)
+            {
+                if (dias == 1)
+                    str = str + dias.ToString() + " día ";
+                else
+                    str = str + dias.ToString() + " días ";
+            }
+            return str;
+        }
 
         private void GenerateAnexo312(string pathFile)
         {

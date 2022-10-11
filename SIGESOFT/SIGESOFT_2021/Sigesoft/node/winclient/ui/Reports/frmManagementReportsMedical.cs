@@ -336,7 +336,7 @@ namespace Sigesoft.Node.WinClient.UI.Reports
             var datosGrabo = new ServiceBL().DevolverDatosUsuarioGraboExamen((int)CategoryTypeExam.ExamenFisico, _serviceId);
 
 
-            AtencionIntegral.CreateAtencionIntegral(pathFile, medico, datosP, listAntecedentes, MedicalCenter, exams, datosNin, datosAdol, datosAdul, listEmb, datosAdulMay, diagnosticRepository, medicina, _ExamenesServicio, medicoTratante, datosGrabo);
+            //AtencionIntegral.CreateAtencionIntegral(pathFile, medico, datosP, listAntecedentes, MedicalCenter, exams, datosNin, datosAdol, datosAdul, listEmb, datosAdulMay, diagnosticRepository, medicina, _ExamenesServicio, medicoTratante, datosGrabo);
 
         }
 

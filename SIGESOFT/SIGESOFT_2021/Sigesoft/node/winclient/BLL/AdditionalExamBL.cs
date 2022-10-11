@@ -194,5 +194,22 @@ namespace Sigesoft.Node.WinClient.BLL
                 throw;
             }
         }
+
+        public List<AdditionalExamCustom> GetAdditionalExamByServiceId_Historia(string serviceId)
+        {
+            SigesoftEntitiesModel dbcontext = new SigesoftEntitiesModel();
+
+            var list = (from ade in dbcontext.additionalexam
+                where ade.v_ServiceId == serviceId && ade.i_IsDeleted == 0
+                select new AdditionalExamCustom
+                {
+                    ComponentId = ade.v_ComponentId,
+                    ServiceId = ade.v_ServiceId,
+                    IsProcessed = ade.i_IsProcessed.Value,
+                    IsNewService = ade.i_IsNewService.Value
+                }).ToList();
+
+            return list;
+        }
     }
 }

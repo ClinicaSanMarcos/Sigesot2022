@@ -5702,7 +5702,9 @@
     <EmbeddedResource Include="Usuarios\frmUsers.resx">
       <DependentUpon>frmUsers.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Dataset\Anexo7D.xsc">
       <DependentUpon>Anexo7D.xsd</DependentUpon>
     </None>

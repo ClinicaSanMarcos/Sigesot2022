@@ -11558,6 +11558,74 @@ namespace Sigesoft.Node.WinClient.BLL
                 throw;
             }
         }
+        public string UpdateServiceComponentDB(string v_ServiceComponentId, int userId)
+        {
+            try
+            {
+                SigesoftEntitiesModel dbContext = new SigesoftEntitiesModel();
+
+                List<string> listComponents = new List<string>();
+                //int userId = 0;
+                // Obtener Service y Categoria
+                var data1 = (from a in dbContext.updateservicecomponent1_sp(v_ServiceComponentId)
+                    select new InfoServiceComponent
+                    {
+                        componentName = a.v_Value1,
+                        serviceId_ = a.v_ServiceId
+                    }).FirstOrDefault();
+
+                //  Obtener los servicecomponent de toda la categoria
+                var data2 = (from a in dbContext.updateservicecomponent2_sp(data1.serviceId_, data1.componentName)
+                    select new listComponents
+                    {
+                        v_ServiceComponentId = a.v_ServiceComponentId
+                    }).ToList();
+                string respuesta = "";
+                if (data2.Count > 0)
+                {
+                    foreach (var item in data2)
+                    {
+                        dbContext.updateservicecomponent3_sp(item.v_ServiceComponentId, userId);
+                        respuesta = "CARGADO";
+                    }
+                }
+                else
+                {
+                    respuesta = "NO CARGADO";
+                }
+
+                return respuesta;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+        public UsuariosAnt ObtenerUsuarioAnteriorDB(string v_ServiceComponentId)
+        {
+            try
+            {
+                SigesoftEntitiesModel dbContext = new SigesoftEntitiesModel();
+
+                List<string> listComponents = new List<string>();
+
+                var data1 = (from a in dbContext.getobtenerusuarioanterior_sp(v_ServiceComponentId)
+                    select new UsuariosAnt
+                    {
+                        userId1 = a.i_ApprovedUpdateUserId.Value,
+                        userId2 = a.i_ProfessionId.Value
+                    }).FirstOrDefault();
+
+                return data1;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+
 		public void ActualizarServicioArea(string pstrServiceId, string pstrAreaId)
 		{
 			try
