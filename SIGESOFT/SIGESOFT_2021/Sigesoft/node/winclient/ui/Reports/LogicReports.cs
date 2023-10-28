@@ -2882,6 +2882,11 @@ namespace Sigesoft.Node.WinClient.UI.Reports
                     GenerateLaboratorioReport(string.Format("{0}.pdf", Path.Combine(_ruta, _serviceId + "-" + Constants.INFORME_LABORATORIO_CLINICO)));
                     _filesNameToMerge.Add(string.Format("{0}.pdf", Path.Combine(_ruta, _serviceId + "-" + componentId)));
                     break;
+
+                case Constants.INFORME_LABORATORIO_ID_CASTA:
+                    Generate_Laboratorio_Casta(string.Format("{0}.pdf", Path.Combine(_ruta, _serviceId + "-" + Constants.INFORME_LABORATORIO_ID_CASTA)));
+                    _filesNameToMerge.Add(string.Format("{0}.pdf", Path.Combine(_ruta, _serviceId + "-" + componentId)));
+                    break;
                 //// ARNOLD
                 case Constants.FICHA_SAS_ID:
                     GenerateInformeSAS(string.Format("{0}.pdf", Path.Combine(_ruta, _serviceId + "-" + Constants.FICHA_SAS_ID)));
@@ -3658,6 +3663,20 @@ namespace Sigesoft.Node.WinClient.UI.Reports
             var serviceComponents = _serviceBL.GetServiceComponentsReport(_serviceId);
             // usar para el logo cliente filiationData.LogoCliente
             LaboratorioReport.CreateLaboratorioReport(filiationData, serviceComponents, MedicalCenter, pathFile);
+        }
+
+        private void Generate_Laboratorio_Casta(string pathFile)
+        {
+            var MedicalCenter = _serviceBL.GetInfoMedicalCenter();
+            var filiationData = _pacientBL.GetPacientReportEPS(_serviceId);
+            //var _NombreMedico = _pacientBL.GetNombreMedicoLab(_serviceId);
+            //var _NombreEmpresa = _pacientBL.GetNombreEmpresaLab(_serviceId);
+            var serviceComponents = _serviceBL.GetServiceComponentsReport(_serviceId);
+            var datosP = _pacientBL.DevolverDatosPaciente(_serviceId);
+
+            var datosGrabo = _serviceBL.DevolverDatosUsuarioGraboExamen((int)CategoryTypeExam.LaboratorioCasta, _serviceId);//ok STORE IN MICRO SERVICE - ARNOLD
+
+            InformeLaboratoriocCasta.CreateExamen_InformeLaboratoriocCasta(filiationData, serviceComponents, MedicalCenter, datosP, pathFile, datosGrabo);
         }
 
         private void GenerateMiExamen(string pathFile)

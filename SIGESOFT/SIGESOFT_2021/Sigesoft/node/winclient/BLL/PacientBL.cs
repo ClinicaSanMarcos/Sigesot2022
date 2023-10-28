@@ -2207,6 +2207,46 @@ namespace Sigesoft.Node.WinClient.BLL
             }
         }
 
+        //public NombreMedicoLab GetNombreMedicoLab(string serviceId)
+        //{
+        //    try
+        //    {
+        //        SigesoftEntitiesModel dbContext = new SigesoftEntitiesModel();
+        //        //ok STORE IN MICRO SERVICE - ARNOLD
+        //        var objEntity = (from a in dbContext.getnombremedicolab_sp(serviceId)
+        //            select new NombreMedicoLab
+        //            {
+        //                NombreMedico = a.Medico
+        //            }).FirstOrDefault();
+
+        //        return objEntity;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return null;
+        //    }
+        //}
+
+        //public NombreEmpresaLab GetNombreEmpresaLab(string serviceId)
+        //{
+        //    try
+        //    {
+        //        SigesoftEntitiesModel dbContext = new SigesoftEntitiesModel();
+        //        //ok STORE IN MICRO SERVICE - ARNOLD
+        //        var objEntity = (from a in dbContext.getnombreempresalab_sp(serviceId)
+        //            select new NombreEmpresaLab
+        //            {
+        //                NombreEmpresa = a.EMPRESA
+        //            }).FirstOrDefault();
+
+        //        return objEntity;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return null;
+        //    }
+        //}
+
         public PacientList GetPacientReportEPS(string serviceId)
         {
             //mon.IsActive = true;
@@ -8910,6 +8950,7 @@ namespace Sigesoft.Node.WinClient.BLL
                                  from pr2 in pr2_join.DefaultIfEmpty()
 
                                  join his in dbContext.historyclinics on b.v_PersonId equals his.v_PersonId
+
                                  where a.v_ServiceId == pstrServiceId && a.i_IsDeleted == 0
                                  select new Sigesoft.Node.WinClient.BE.PacientList
                                  {

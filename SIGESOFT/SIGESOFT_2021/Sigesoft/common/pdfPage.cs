@@ -216,23 +216,23 @@ namespace NetPdf
  
         public override void OnEndPage(PdfWriter writer, Document doc)
         {
-            var rutaImg = Sigesoft.Common.Utils.GetApplicationConfigValue("imgFooter2");
-            var footerTbl = new PdfPTable(1);
-            footerTbl.TotalWidth = doc.PageSize.Width;
+            //var rutaImg = Sigesoft.Common.Utils.GetApplicationConfigValue("imgFooter2");
+            //var footerTbl = new PdfPTable(1);
+            //footerTbl.TotalWidth = doc.PageSize.Width;
 
-            var type = doc.PageSize.GetType();
-            if (doc.PageSize.Width == PageSize.A5.Width)
-            {
-                var imageCell = new PdfPCell(HandlingItextSharp.GetImage(rutaImg, null, null, 370, 20)) { Border = PdfPCell.NO_BORDER };
-                footerTbl.AddCell(imageCell);
-                footerTbl.WriteSelectedRows(0, -1, doc.LeftMargin, (doc.BottomMargin + 0), writer.DirectContent);
-            }
-            else
-            {
-                var imageCell = new PdfPCell(HandlingItextSharp.GetImage(rutaImg, null, null, 520, 41)) { Border = PdfPCell.NO_BORDER };
-                footerTbl.AddCell(imageCell);
-                footerTbl.WriteSelectedRows(0, -1, doc.LeftMargin, (doc.BottomMargin + 0), writer.DirectContent);
-            }
+            //var type = doc.PageSize.GetType();
+            //if (doc.PageSize.Width == PageSize.A5.Width)
+            //{
+            //    var imageCell = new PdfPCell(HandlingItextSharp.GetImage(rutaImg, null, null, 370, 20)) { Border = PdfPCell.NO_BORDER };
+            //    footerTbl.AddCell(imageCell);
+            //    footerTbl.WriteSelectedRows(0, -1, doc.LeftMargin, (doc.BottomMargin + 0), writer.DirectContent);
+            //}
+            //else
+            //{
+            //    var imageCell = new PdfPCell(HandlingItextSharp.GetImage(rutaImg, null, null, 520, 41)) { Border = PdfPCell.NO_BORDER };
+            //    footerTbl.AddCell(imageCell);
+            //    footerTbl.WriteSelectedRows(0, -1, doc.LeftMargin, (doc.BottomMargin + 0), writer.DirectContent);
+            //}
    
         }
        

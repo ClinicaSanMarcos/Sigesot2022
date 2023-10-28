@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Infragistics.Win.Appearance appearance1 = new Infragistics.Win.Appearance();
+            Infragistics.Win.Appearance appearance106 = new Infragistics.Win.Appearance();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmEsoV2));
             Infragistics.Win.Appearance appearance2 = new Infragistics.Win.Appearance();
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand1 = new Infragistics.Win.UltraWinGrid.UltraGridBand("Band 0", -1);
@@ -886,14 +886,14 @@
             // 
             // uvExamen
             // 
-            appearance1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            appearance1.BackColor2 = System.Drawing.Color.Transparent;
-            appearance1.BackGradientStyle = Infragistics.Win.GradientStyle.Vertical;
-            appearance1.BorderAlpha = Infragistics.Win.Alpha.Opaque;
-            appearance1.BorderColor = System.Drawing.Color.Red;
-            appearance1.BorderColor2 = System.Drawing.Color.Red;
-            appearance1.BorderColor3DBase = System.Drawing.Color.Red;
-            this.uvExamen.ErrorAppearance = appearance1;
+            appearance106.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            appearance106.BackColor2 = System.Drawing.Color.Transparent;
+            appearance106.BackGradientStyle = Infragistics.Win.GradientStyle.Vertical;
+            appearance106.BorderAlpha = Infragistics.Win.Alpha.Opaque;
+            appearance106.BorderColor = System.Drawing.Color.Red;
+            appearance106.BorderColor2 = System.Drawing.Color.Red;
+            appearance106.BorderColor3DBase = System.Drawing.Color.Red;
+            this.uvExamen.ErrorAppearance = appearance106;
             this.uvExamen.ErrorImageAlignment = System.Windows.Forms.ErrorIconAlignment.TopLeft;
             this.uvExamen.ErrorImageTransparentColor = System.Drawing.Color.Transparent;
             this.uvExamen.MessageBoxIcon = System.Windows.Forms.MessageBoxIcon.None;
@@ -962,7 +962,7 @@
             this.tpConclusion.Controls.Add(this.gbRecomendaciones_Conclusiones);
             this.tpConclusion.Location = new System.Drawing.Point(4, 22);
             this.tpConclusion.Name = "tpConclusion";
-            this.tpConclusion.Size = new System.Drawing.Size(1310, 557);
+            this.tpConclusion.Size = new System.Drawing.Size(1310, 564);
             this.tpConclusion.TabIndex = 2;
             this.tpConclusion.Text = "APTITUD";
             this.tpConclusion.ToolTipText = "CONCLUSIONES";
@@ -1720,7 +1720,7 @@
             this.tpAnalisisDx.Controls.Add(this.gbTotalDiagnostico);
             this.tpAnalisisDx.Location = new System.Drawing.Point(4, 22);
             this.tpAnalisisDx.Name = "tpAnalisisDx";
-            this.tpAnalisisDx.Size = new System.Drawing.Size(1310, 557);
+            this.tpAnalisisDx.Size = new System.Drawing.Size(1310, 564);
             this.tpAnalisisDx.TabIndex = 3;
             this.tpAnalisisDx.Text = "CONTROL DE CALIDAD";
             this.tpAnalisisDx.ToolTipText = "ANÁLISIS DE DIAGNÓSTICOS";
@@ -2922,7 +2922,7 @@
             this.General.Location = new System.Drawing.Point(4, 22);
             this.General.Name = "General";
             this.General.Padding = new System.Windows.Forms.Padding(3);
-            this.General.Size = new System.Drawing.Size(1310, 557);
+            this.General.Size = new System.Drawing.Size(1310, 564);
             this.General.TabIndex = 0;
             this.General.Text = "ANAMNESIS - ANTECEDENTES";
             this.General.UseVisualStyleBackColor = true;
@@ -3828,7 +3828,7 @@
             this.tpAtencionIntegral.Location = new System.Drawing.Point(4, 22);
             this.tpAtencionIntegral.Name = "tpAtencionIntegral";
             this.tpAtencionIntegral.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAtencionIntegral.Size = new System.Drawing.Size(1310, 557);
+            this.tpAtencionIntegral.Size = new System.Drawing.Size(1310, 564);
             this.tpAtencionIntegral.TabIndex = 4;
             this.tpAtencionIntegral.Text = "FORMATO DE ATENCIÓN INTEGRAL";
             this.tpAtencionIntegral.UseVisualStyleBackColor = true;
@@ -4557,7 +4557,7 @@
             this.tpDatosGeneralesAntecedentes.Location = new System.Drawing.Point(4, 22);
             this.tpDatosGeneralesAntecedentes.Name = "tpDatosGeneralesAntecedentes";
             this.tpDatosGeneralesAntecedentes.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDatosGeneralesAntecedentes.Size = new System.Drawing.Size(1310, 557);
+            this.tpDatosGeneralesAntecedentes.Size = new System.Drawing.Size(1310, 564);
             this.tpDatosGeneralesAntecedentes.TabIndex = 5;
             this.tpDatosGeneralesAntecedentes.Text = "DATOS GENERALES Y ANTECEDENTES";
             this.tpDatosGeneralesAntecedentes.UseVisualStyleBackColor = true;
@@ -7518,7 +7518,7 @@
             this.tpCuidadosPreventivos.Controls.Add(this.tableLayoutPanel13);
             this.tpCuidadosPreventivos.Location = new System.Drawing.Point(4, 22);
             this.tpCuidadosPreventivos.Name = "tpCuidadosPreventivos";
-            this.tpCuidadosPreventivos.Size = new System.Drawing.Size(1310, 557);
+            this.tpCuidadosPreventivos.Size = new System.Drawing.Size(1310, 564);
             this.tpCuidadosPreventivos.TabIndex = 6;
             this.tpCuidadosPreventivos.Text = "CUIDADOS PREVENTIVOS";
             this.tpCuidadosPreventivos.UseVisualStyleBackColor = true;

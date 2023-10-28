@@ -56,6 +56,7 @@
     <Compile Include="Custom\ConsultaGerencia.cs" />
     <Compile Include="Custom\DataEpisodio.cs" />
     <Compile Include="Custom\DatoEso.cs" />
+    <Compile Include="Custom\devolverDatosPacienteResponse.cs" />
     <Compile Include="Custom\DynamicSchedule.cs" />
     <Compile Include="Custom\Antecedentes.cs" />
     <Compile Include="Custom\AntecedentesList.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Custom\MedicoTratanteAtenciones.cs" />
     <Compile Include="Custom\Ninioo.cs" />
     <Compile Include="Custom\OperationsNatclarBe.cs" />
+    <Compile Include="Custom\pacientreportepsResponse.cs" />
     <Compile Include="Custom\PagoEspecialistaOcupacional.cs" />
     <Compile Include="Custom\PagosComisiones.cs" />
     <Compile Include="Custom\PlanesDeVida.cs" />
@@ -305,6 +307,9 @@
     <Compile Include="Custom\ServiceComponentFieldsList.cs" />
     <Compile Include="Custom\ServiceComponentFieldValuesList.cs" />
     <Compile Include="Custom\ServiceComponentList.cs" />
+    <Compile Include="Custom\serviceComponentsReportCResponse.cs" />
+    <Compile Include="Custom\serviceComponentsReportSCResponse.cs" />
+    <Compile Include="Custom\serviceComponentsReport_DxListResponse.cs" />
     <Compile Include="Custom\ServiceData.cs" />
     <Compile Include="Custom\ServiceDetailCustom.cs" />
     <Compile Include="Custom\ServiceGridJerarquizadaList.cs" />

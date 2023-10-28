@@ -625,8 +625,8 @@ namespace Sigesoft.Common
         Psicosensometrico = 22,
 
         Ecografia = 24,
-        ConsultorioExternoYEmergencia = 30
-
+        ConsultorioExternoYEmergencia = 30,
+        LaboratorioCasta = 19
     }
 
     public enum PeligrosEnElPuesto

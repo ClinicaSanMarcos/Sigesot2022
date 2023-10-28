@@ -91,6 +91,7 @@
     <Compile Include="AtencionIntegralAdolescente.cs" />
     <Compile Include="AtencionIntegralAdulto.cs" />
     <Compile Include="AtencionIntegralAdultoMayor.cs" />
+    <Compile Include="Autorizacion_Realizacion_Examen_Medico_AutorizacionFirma.cs" />
     <Compile Include="Autorizacion_Realizacion_Ex_Lumina.cs" />
     <Compile Include="Aut_Liberacion_San_Martin.cs" />
     <Compile Include="BoletaTrabajador\BoletaTrabajador.cs" />
@@ -111,6 +112,7 @@
     <Compile Include="Declaracion_Jurada_Sintomatico_Respiratorio.cs" />
     <Compile Include="HistoriaClinicaSM.cs" />
     <Compile Include="Informe_Radiologico_Lumina.cs" />
+    <Compile Include="LABORATORIO CASTA\InformeLaboratoriocCasta.cs" />
     <Compile Include="LiquidacionHosp.cs" />
     <Compile Include="LiquidacionAseguradoraReport.cs" />
     <Compile Include="Osteomuscular_MiBanco.cs" />

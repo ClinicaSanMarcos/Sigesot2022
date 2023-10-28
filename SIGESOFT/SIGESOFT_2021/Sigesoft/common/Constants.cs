@@ -14,7 +14,367 @@ namespace Sigesoft.Common
         public const string HISTORIA_CLINICA_SAN_MARCOS_PLAN_TRABAJO = "N009-MF000004960";
         public const string HISTORIA_CLINICA_SAN_MARCOS_TIPO_CONSULTA = "N009-MF000004961";
         #endregion
+
+
+        #region LABORATORIO CASTA
+
+        public const string INFORME_LABORATORIO_ID_CASTA = "N001-ME000000003";
+        public const string INFORME_LABORATORIO_CASTA_ATENCION = "N009-MF000005134";
+        public const string INFORME_LABORATORIO_CASTA_SERVICIO = "N009-MF000005135";
+        public const string INFORME_LABORATORIO_CASTA_RESULTADO = "N009-MF000005136";
+
+
+
+        #region BIOQUIMICA
+
+        #region GLUOSA BASAL - LAB
+        public const string GLUCOSA_BASAL_ID = "N009-ME000000008";
+        public const string GLUCOSA_BASAL_VALOR = "N009-MF000000261";
+        public const string GLUCOSA_BASAL_VALOR_DESEABLE = "N009-MF000005117";
+        #endregion
+
+        #region GLUOSA COLEST TRIG
+        public const string GLUCOSA_COLES_TRIG_ID= "N009-ME000001466";
         
+        public const string GLUCOSA_VALOR = "N009-MF000005118";
+        public const string GLUCOSA_VALOR_DESEABLE = "N009-MF000005119";
+
+        public const string COLEST_BASAL_VALOR = "N009-MF000005120";
+        public const string COLEST_BASAL_VALOR_DESEABLE = "N009-MF000005121";
+
+        public const string TRIGL_VALOR = "N009-MF000005122";
+        public const string TRIGL_VALOR_DESEABLE = "N009-MF000005123";
+
+        public const string OBSERVACIONES_GLUC_COL_TR = "N009-MF000005124";
+
+        #endregion
+
+        #region GAMMA GLUTAMIL TRANSPEPTIDASA GGTP - LAB
+        public const string GGTP_ID_ASIST = "N009-ME000000532";
+        public const string GGTP_VALOR = "N009-MF000004921";
+        public const string GGTP_DESEABLE = "N009-MF000004922";
+        #endregion
+
+        #region AMILASA - LAB
+        public const string AMILASA_ID = "N022-ME000000346";
+        public const string AMILASA_VALOR = "N009-MF000005125";
+        public const string AMILASA_DESEABLE = "N009-MF000005126";
+        #endregion
+
+        #region PERFIL LIPIDICO - LAB
+
+        public const string PERFIL_LIPIDICO_ID = "N009-ME000000114";
+
+        public const string PL_COLESTEROL_TOTAL = "N009-MF000001904";
+        public const string PL_COLESTEROL_TOTAL_DESEABLE = "N009-MF000001905";
+        public const string PL_COLESTEROL_HDL = "N009-MF000000254";
+        public const string PL_COLESTEROL_HDL_DESEABLE = "N009-MF000000414";
+        public const string PL_REL_COLESTEROL_HDL = "N009-MF000005085";
+        public const string PL_REL_COLESTEROL_HDL_DESEABLE = "N009-MF000005086";
+        public const string PL_COLESTEROL_LDL = "N009-MF000001073";
+        public const string PL_COLESTEROL_LDL_DESEABLE = "N009-MF000001074";
+        public const string PL_COLESTEROL_VLDL = "N009-MF000001075";
+        public const string PL_COLESTEROL_VLDL_DESEABLE = "N009-MF000001076";
+        public const string PL_TRIGLICERIDOS = "N009-MF000001906";     
+        public const string PL_TRIGLICERIDOS_DESEABLE = "N009-MF000001907";
+     
+        public const string PL_observaciones= "N009-MF000005087";
+
+        
+        
+        #endregion
+
+        #region  PERFIL HEPATICO
+        public const string PERFIL_HEPATICO_ID_LC = "N009-ME000000096";
+
+        public const string PH_FOSFATASA_ALCALINA_VALOR = "N009-MF000001802";
+        public const string PH_FOSFATASA_ALCALINA_DESEABLE = "N009-MF000001803";
+        public const string PH_TGO_VALOR = "N009-MF000001798";
+        public const string PH_TGO_DESEABLE = "N009-MF000001799";
+        public const string PH_TGP_VALOR = "N009-MF000001800";
+        public const string PH_TGP_DESEABLE = "N009-MF000001801";
+
+        public const string PH_BILIRRUBINA_TOTAL_VALOR = "N009-MF000001806";
+        public const string PH_BILIRRUBINA_TOTAL_DESEABLE = "N009-MF000001807";
+        public const string PH_BILIRRUBINA_DIRECTA_VALOR = "N009-MF000001808";
+        public const string PH_BILIRRUBINA_DIRECTA_DESEABLE = "N009-MF000001809";
+        public const string PH_BILIRRUBINA_INDIRECTA_VALOR = "N009-MF000001810";
+        public const string PH_BILIRRUBINA_INDIRECTA_DESEABLE = "N009-MF000001811";
+
+        public const string PH_PROTEINAS_TOTALES_VALOR = "N009-MF000001792";
+        public const string PH_PROTEINAS_TOTALES_DESEABLE = "N009-MF000001793";
+        public const string PH_ALBUMINA_VALOR = "N009-MF000001794";
+        public const string PH_ALBUMINA_DESEABLE = "N009-MF000001795";
+        public const string PH_GLOBULINA_VALOR = "N009-MF000001796";
+        public const string PH_GLOBULINA_DESEABLE = "N009-MF000001797";
+
+        public const string PH_OBSERVACIONES = "N009-MF000001804";
+        #endregion
+        
+        #region PERFIL RENAL - LAB
+
+        public const string PERFIL_RENAL_ID = "N009-ME000001463";
+
+        public const string PR_UREA = "N009-MF000005088";
+        public const string PR_UREA_DESEABLE = "N009-MF000005089";
+        public const string PR_CREATININA = "N009-MF000005090";
+        public const string PR_CREATININA_DESEABLE = "N009-MF000005091";
+
+        public const string PR_observaciones = "N009-MF000005092";
+
+
+
+        #endregion
+
+        #endregion
+
+        #region HEMATOLOGIA
+
+        #region GRUPO SANGUINEO Y FACTOR RH - LAB
+        public const string GRUPO_SANGUINEO_Y_FACTOR_RH_ID = "N010-ME000000288";
+        public const string GRUPO_SANGUINEO_VALOR = "N009-MF000005112";
+        public const string FACTOR_RH_VALOR = "N009-MF000005113";
+        #endregion
+        #region PRUEBA CRUZADA - LAB
+
+        public const string PRUEBA_CRUZADA_ID = "N009-ME000001465";
+        public const string GRUPO_SANGUINEO_VALOR_PC = "N009-MF000005114";
+        public const string FACTOR_RH_VALOR_PC = "N009-MF000005115";
+        public const string COMPATIBILIDAD_VALOR_PC = "N009-MF000005116";
+
+        #endregion
+
+        #region HEMOGLOBINA  Y HEMATOCRITO- LAB
+        public const string HEMOGLOBINA_HEMATOCRITO_ID = "N009-ME000000006";
+
+        public const string HH_HEMOGLOBINA_VALOR = "N009-MF000000265";
+        public const string HH_HEMOGLOBINA_VALOR_DESEABLE = "N009-MF000000420";
+        public const string HH_HEMATOCRITO_VALOR = "N009-MF000005137";
+        public const string HH_HEMATOCRITO_VALOR_DESEABLE = "N009-MF000005079";
+        #endregion
+
+        #region HEMOGRAMA AUTOMATIZADO - LAB
+        public const string HEMOGRAMAA_ID = "N009-ME000000113";
+
+        public const string HA_LEUCOCITOS_VALOR = "N009-MF000001890";
+        public const string HA_LEUCOCITOS_VALOR_DESEABLE = "N009-MF000001891";
+
+        public const string HA_LINFOCITOS_VALOR = "N009-MF000001892";
+        public const string HA_LINFOCITOS_VALOR_DESEABLE = "N009-MF000001893";
+        public const string HA_MONOCITOS_VALOR = "N009-MF000001902";
+        public const string HA_MONOCITOS_VALOR_DESEABLE = "N009-MF000001903";
+        public const string HA_ABASTONADOS_VALOR = "N009-MF000003207";
+        public const string HA_ABASTONADOS_VALOR_DESEABLE = "N009-MF000003208";
+        public const string HA_SEGMENTADOS_VALOR = "N009-MF000001898";
+        public const string HA_SEGMENTADOS_VALOR_DESEABLE = "N009-MF000001899";
+        public const string HA_EOSINOFILOS_VALOR = "N009-MF000001894";
+        public const string HA_EOSINOFILOS_VALOR_DESEABLE = "N009-MF000001895";
+        public const string HA_BASOFILOS_VALOR = "N009-MF000001900";
+        public const string HA_BASOFILOS_VALOR_DESEABLE = "N009-MF000001901";
+
+        public const string HA_LINFOCITOS_VALOR_3 = "N009-MF000005065";
+        public const string HA_LINFOCITOS_VALOR_DESEABLE_3 = "N009-MF000005066";
+        public const string HA_MONOCITOS_VALOR_3 = "N009-MF000005067";
+        public const string HA_MONOCITOS_VALOR_DESEABLE_3 = "N009-MF000005068";
+        public const string HA_ABASTONADOS_VALOR_3 = "N009-MF000005069";
+        public const string HA_ABASTONADOS_VALOR_DESEABLE_3 = "N009-MF000005070";
+        public const string HA_SEGMENTADOS_VALOR_3 = "N009-MF000005071";
+        public const string HA_SEGMENTADOS_VALOR_DESEABLE_3 = "N009-MF000005072";
+        public const string HA_EOSINOFILOS_VALOR_3 = "N009-MF000005073";
+        public const string HA_EOSINOFILOS_VALOR_DESEABLE_3 = "N009-MF000005074";
+        public const string HA_BASOFILOS_VALOR_3 = "N009-MF000005075";
+        public const string HA_BASOFILOS_VALOR_DESEABLE_3 = "N009-MF000005076";
+
+
+        public const string HA_HEMATIES_VALOR = "N009-MF000001878";
+        public const string HA_HEMATIES_VALOR_DESEABLE = "N009-MF000001879";
+        public const string HA_HEMOGLOBINA_VALOR = "N009-MF000001874";
+        public const string HA_HEMOGLOBINA_VALOR_DESEABLE = "N009-MF000001875";
+        public const string HA_HEMATOCRITO_VALOR = "N009-MF000001876";
+        public const string HA_HEMATOCRITO_VALOR_DESEABLE = "N009-MF000001877";
+
+        public const string HA_VOLUMEN_CORPUSCULAR_MEDIO_VALOR = "N009-MF000001880";
+        public const string HA_VOLUMEN_CORPUSCULAR_MEDIO_VALOR_DESEABLE = "N009-MF000001881";
+        public const string HA_HB_CORPUSCULAR_MEDIO_VALOR = "N009-MF000001882";
+        public const string HA_HB_CORPUSCULAR_MEDIO_VALOR_DESEABLE = "N009-MF000001883";
+        public const string HA_CONCENTRACION_HB_CORPUSCULAR_VALOR = "N009-MF000001884";
+        public const string HA_CONCENTRACION_HB_CORPUSCULAR_VALOR_DESEABLE = "N009-MF000001885";
+        public const string HA_RDW_VALOR = "N009-MF000005077";
+        public const string HA_RDW_VALOR_DESEABLE = "N009-MF000005078";
+
+        public const string HA_RECUENTO_PLAQUETAS_VALOR = "N009-MF000001886";
+        public const string HA_RECUENTO_PLAQUETAS_VALOR_DESEABLE = "N009-MF000001887";
+        public const string HA_VOLUMEN_PLAQUETARIO_MEDIO_VALOR = "N009-MF000003205";
+        public const string HA_VOLUMEN_PLAQUETARIO_MEDIO_VALOR_DESEABLE = "N009-MF000003206";
+        public const string HA_ANCHO_DISTRIBUCION_PLAQUETARIO_VALOR = "N009-MF000001888";
+        public const string HA_ANCHO_DISTRIBUCION_PLAQUETARIO_VALOR_DESEABLE = "N009-MF000001889";
+        public const string HA_PLAQUETOCRITO_VALOR = "N009-MF000001897";
+        public const string HA_PLAQUETOCRITO_VALOR_DESEABLE = "N009-MF000001896";
+        
+        public const string HA_OTROS = "N009-MF000004441";
+        #endregion
+
+
+        #endregion
+
+        #region URIANALISIS
+
+        #region EXAMEN ORINA COMPLETO - LAB
+        public const string EXAMEN_ORINA_COMPLETO_ID = "N009-ME000000046";
+
+        public const string ECO_COLOR_CL = "N009-MF000000444";
+        public const string ECO_ASPECTO_CL = "N009-MF000001041";
+        public const string ECO_DENSIDAD_CL = "N009-MF000001043";
+        public const string ECO_DENSIDAD_DESEABLE_CL = "N009-MF000003224";
+        public const string ECO_REACCION_PH_CL = "N009-MF000001045";
+
+
+        public const string ECO_PROTEINAS_CL = "N009-MF000001053";
+        public const string ECO_GLUCOSA_CL = "N009-MF000001313";
+        public const string ECO_CETONAS_CL = "N009-MF000001057";
+        public const string ECO_BILIRRUBINAS_CL = "N009-MF000003439";
+        public const string ECO_UROBILINOGENO_CL = "N009-MF000001049";
+        public const string ECO_SANGRE_ORINA_CL = "N009-MF000001315";
+        public const string ECO_NITRITOS_CL = "N009-MF000001055";
+        public const string ECO_LEUCOCITOS_CL = "N009-MF000001061";
+        public const string ECO_ACIDO_ASCORBICO_CL = "N009-MF000001071";
+
+        public const string ECO_CELULAS_EPITELIALES_CL = "N009-MF000001059";
+        public const string ECO_CELULAS_EPITELIALES_DESEADO_CL = "N009-MF000001065";
+        public const string ECO_LEUCOCITOS_2_CL = "N009-MF000003438";
+        public const string ECO_LEUCOCITOS_DESEADO_CL = "N009-MF000003242";
+        public const string ECO_HEMATIES_CL = "N009-MF000001063";
+        public const string ECO_HEMATIES_DESEADO_CL = "N009-MF000003244";
+        public const string ECO_GERMENES_CL = "N009-MF000001067";
+        public const string ECO_GERMENES_DESEADO_CL = "N009-MF000003243";
+        public const string ECO_CILINDROS_CL = "N009-MF000001069";
+        public const string ECO_CILINDROS_DESEADO_CL = "N009-MF000003245";
+        public const string ECO_CRISTALES_CL = "N009-MF000003246";
+        public const string ECO_CRISTALES_DESEADO_CL = "N009-MF000003247";
+        public const string ECO_FILAMENTOS_MUCOIDES_CL = "N009-MF000003440";
+
+        public const string ECO_RESULTADO_CL = "N009-MF000003210";
+
+        #endregion
+
+        #endregion
+
+        #region MICROBIOLOGIA
+
+        #region PARASITOLOGICO SERIADO
+        public const string PARASITOLOGICO_SERIADO_LC = "N009-ME000000049";
+
+        public const string PSER_COLOR_1 = "N009-MF000000515";
+        public const string PSER_ASPECTO_1 = "N009-MF000005063";
+        public const string PSER_CONSISTENCIA_1 = "N009-MF000001329";
+        public const string PSER_RESULTADO_1 = "N009-MF000003261";
+
+        public const string PSER_COLOR_2 = "N009-MF000001330";
+        public const string PSER_ASPECTO_2 = "N009-MF000001340";
+        public const string PSER_CONSISTENCIA_2 = "N009-MF000001345";
+        public const string PSER_RESULTADO_2 = "N009-MF000003262";
+
+        public const string PSER_COLOR_3 = "N009-MF000001346";
+        public const string PSER_ASPECTO_3 = "N009-MF000003259";
+        public const string PSER_CONSISTENCIA_3 = "N009-MF000003260";
+        public const string PSER_RESULTADO_3 = "N009-MF000005064";
+        #endregion
+
+        #region PARASITOLOGICO SIMPLE
+        public const string PARASITOLOGICO_SIMPLE_LC = "N002-ME000000016";
+
+        public const string PSIM_COLOR_1 = "N009-MF000005130";
+        public const string PSIM_ASPECTO_1 = "N009-MF000005131";
+        public const string PSIM_CONSISTENCIA_1 = "N009-MF000005132";
+        public const string PSIM_RESULTADO_1 = "N009-MF000005133";
+        #endregion
+
+        #region THEVENON SIMPLE - LAB
+        public const string THEVENON_SIMPLE_ID = "N022-ME000000421";
+
+        public const string T_SIMPLE = "N009-MF000005081";
+       
+        #endregion
+
+        #region REACCION INFLAMATORIA - LAB
+        public const string REACCION_INFLAMATORIA_ID_ = "N009-ME000001464";
+
+        public const string RIN_COLOR = "N009-MF000005093";
+        public const string RIN_CONSISTENCIA = "N009-MF000005094";
+        public const string RIN_MOCO = "N009-MF000005095";
+        public const string RIN_SANGRE = "N009-MF000005096";
+
+        public const string RIN_HEMATIES= "N009-MF000005097";
+        public const string RIN_HEMATIES_VD = "N009-MF000005098";
+
+        public const string RIN_LEUCOCITOS = "N009-MF000005099";
+        public const string RIN_LEUCOCITOS_VD = "N009-MF000005100";
+
+        public const string RIN_MONONUCLEARES= "N009-MF000005101";
+        public const string RIN_POLIMORFONUCLEAR = "N009-MF000005103";
+
+        public const string RIN_OBSERVACIONES= "N009-MF000005104";
+        #endregion
+
+        #region KOH
+        public const string KOH_ID = "N009-ME000001300";
+
+        public const string KOH_VALOR = "N009-MF000005082";
+
+        #endregion
+
+        #region TEST DE GRAHAM - LAB
+        public const string TEST_GRAHAM_ID = "N022-ME000000416";
+
+        public const string TEST_GRAHAM_RESULTADO = "N009-MF000005127";
+        public const string TEST_GRAHAM_OBS = "N009-MF000005128";
+
+        #endregion
+
+        #endregion
+
+
+        #region INMUNOLOGIA
+
+        #region SUBUNIDAD BETA HCG CUALITATIVO - LAB
+        public const string BHCG_CUALITATIVO_ID = "N009-ME000000507";
+        public const string BHCG_CUALITATIVO_VALOR = "N009-MF000005080";
+        #endregion
+
+        #region HEMOGLOBINA GLICOSILADA - LAB
+        public const string HEMOGLOBINA_GLICOSILADA_ID_LC = "N010-ME000000381";
+        public const string HEMOGLOBINA_GLICOSILADA_V = "N009-MF000005083";
+        public const string HEMOGLOBINA_GLICOSILADA__VALOR_DESEABLE = "N009-MF000005084";
+        #endregion
+
+        #region AGLUTINACIONES - LAB
+        public const string AGLUTINACIONES_LAMINA_LC = "N009-ME000001443";
+        public const string AGLUTINACIONES_LAMINA_O = "N009-MF000005105";
+        public const string AGLUTINACIONES_LAMINA_H = "N009-MF000005106";
+        public const string AGLUTINACIONES_LAMINA_A = "N009-MF000005107";
+        public const string AGLUTINACIONES_LAMINA_B = "N009-MF000005108";
+        public const string AGLUTINACIONES_LAMINA_BRUCELLA = "N009-MF000005109";
+        #endregion
+
+        #region VDRL - LAB
+        public const string VDRL_LC = "N010-ME000000309";
+        public const string VDRL_VALOR_LC = "N009-MF000005110";
+        #endregion
+
+        #region PCR - PROTEINA C REACTIVA CUANTITATIVA
+        public const string PCR_PROTEINA_C_REACTIVA_CUANTITATIVA_ID = "N009-ME000001009";
+        public const string PCR_PROTEINA_C_REACTIVA_CUANTITATIVA_VALOR = "N009-MF000005111";
+        #endregion
+
+
+
+        #endregion
+
+
+        #endregion
+
+
+
         public const string Select = "--Seleccionar--";
         public const string SelectValue = "-1";
         public const string All = "--Todos--";
@@ -63,6 +423,9 @@ namespace Sigesoft.Common
         #region consentimiento coimolache
         public const string AUTORIZACION_REALIZACION_EXAMEN_MEDICO_LIBERACION_INFORMACION = "AUT_REAL_EX_MED_LIBER_INF";
         #endregion
+
+        public const string AUTORIZACION_REALIZACION_EXAMEN_MEDICO_LIBERACION_INFORMACION_TODOS = "AUT_REAL_EX_MED_LIBER_INF_TODOS";
+
 
         #region consentimiento coimolache
         public const string CONSENTIMIENTO_INFORMADO_EXAMEN_MEDICO_COIMOLACHE = "C_I_EX_NED_COIMO";

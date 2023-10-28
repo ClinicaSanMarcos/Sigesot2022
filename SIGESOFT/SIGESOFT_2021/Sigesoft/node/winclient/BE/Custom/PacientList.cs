@@ -250,4 +250,14 @@ namespace Sigesoft.Node.WinClient.BE
         public string subcontrata { get; set; }
         public int HistoriaClinica { get; set; }
     }
+
+    public class NombreMedicoLab
+    {
+        public string NombreMedico { get; set; }
+    }
+
+    public class NombreEmpresaLab
+    {
+        public string NombreEmpresa { get; set; }
+    }
 }
