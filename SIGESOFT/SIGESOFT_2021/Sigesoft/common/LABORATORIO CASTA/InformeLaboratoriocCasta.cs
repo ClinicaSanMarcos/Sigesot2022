@@ -89,7 +89,7 @@ namespace NetPdf
             document.NewPage();
             var tamaño_celda = 13f;
 
-            var tamaño_celda_1 = 15f;
+            var tamaño_celda_1 = 16f;
             #region TÍTULO
 
             cells = new List<PdfPCell>();
@@ -171,10 +171,20 @@ namespace NetPdf
             ServiceComponentList perfil_renal = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.PERFIL_RENAL_ID);
             ServiceComponentList gamma_glutamil = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.GGTP_ID_ASIST);
             ServiceComponentList amilasa = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.AMILASA_ID);
+            ServiceComponentList hierro = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.HIERRO_ID);
+            ServiceComponentList colesterol = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.COLESTEROL_TOTAL_ID);
+            ServiceComponentList trigliceridos = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.TRIGLICERIDOS_LC_ID);
+            ServiceComponentList insulina_basal = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.INSULINA_BASAL_LC_ID);
+            ServiceComponentList insulina_postpandrial = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.INSULINA_POSTPANDRIAL_ID);
+
+            ServiceComponentList lipasa = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.LIPASA_ID);
+            ServiceComponentList calcioSerico = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.CALCIO_SERICO_ID);
+            ServiceComponentList electrolitos = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.ELECTROLITOS_ID);
 
 
             if (glucosa_basal != null || glucosa_colesterol_triglice!= null || perfil_hepatico != null || perfil_lipidico != null || perfil_renal != null
-                || gamma_glutamil != null || amilasa != null)
+                || gamma_glutamil != null || amilasa != null || hierro != null || colesterol  != null || trigliceridos != null
+                || insulina_basal != null || insulina_postpandrial != null || lipasa != null || calcioSerico != null || electrolitos != null)
             {
                 cells = new List<PdfPCell>()
                 {
@@ -314,6 +324,155 @@ namespace NetPdf
                     document.Add(table);
                 }
 
+                if (hierro != null)
+                {
+
+                    var HIERRO_VALOR = hierro.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.HIERRO_VALOR) == null ? "-" : hierro.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.HIERRO_VALOR).v_Value1;
+                    var HIERRO_VALOR_UNIDAD = hierro.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.HIERRO_VALOR) == null ? "-" : hierro.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.HIERRO_VALOR).v_MeasurementUnitName;
+                    var HIERRO_DESEABLE = hierro.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.HIERRO_DESEABLE) == null ? "-" : hierro.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.HIERRO_DESEABLE).v_Value1;
+
+
+                    cells = new List<PdfPCell>()
+                    {
+                        
+                        new PdfPCell(new Phrase("HIERRO SERICO", fontColumnValueBold)) { Colspan = 19, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda,  UseVariableBorders = true, BorderColorLeft = colorPlantilla, BorderColorRight = colorPlantilla, BorderColorBottom = colorPlantilla, BorderColorTop = colorPlantilla },                 
+
+                        new PdfPCell(new Phrase("   HIERRO SERICO \n   (Método: Colorimetrico)", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(HIERRO_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(HIERRO_DESEABLE, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(HIERRO_VALOR_UNIDAD, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                       
+                     };
+
+                    columnWidths = new float[] { 9f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 3f, 8f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+                    table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+                    document.Add(table);
+                }
+
+                if (calcioSerico != null)
+                {
+
+                    var CALCIO_SERICO_VALOR = calcioSerico.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CALCIO_SERICO_VALOR) == null ? "-" : calcioSerico.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CALCIO_SERICO_VALOR).v_Value1;
+                    var CALCIO_SERICO_VALOR_UNIDAD = calcioSerico.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CALCIO_SERICO_VALOR) == null ? "-" : calcioSerico.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CALCIO_SERICO_VALOR).v_MeasurementUnitName;
+                    var CALCIO_SERICO_DESEABLE = calcioSerico.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CALCIO_SERICO_DESEABLE) == null ? "-" : calcioSerico.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CALCIO_SERICO_DESEABLE).v_Value1;
+
+
+                    cells = new List<PdfPCell>()
+                    {
+                        
+                        new PdfPCell(new Phrase("CALCIO SERICO", fontColumnValueBold)) { Colspan = 19, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda,  UseVariableBorders = true, BorderColorLeft = colorPlantilla, BorderColorRight = colorPlantilla, BorderColorBottom = colorPlantilla, BorderColorTop = colorPlantilla },                 
+
+                        new PdfPCell(new Phrase("   Calcio serico  \n   (Método: Enzimatica-colorimetrica (NM_BAPTA))", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(CALCIO_SERICO_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(CALCIO_SERICO_DESEABLE, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(CALCIO_SERICO_VALOR_UNIDAD, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                       
+                     };
+
+                    columnWidths = new float[] { 9f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 3f, 8f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+                    table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+                    document.Add(table);
+                }
+
+                if (electrolitos != null)
+                {
+
+                    var SODIO_VALOR = electrolitos.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.SODIO_VALOR) == null ? "-" : electrolitos.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.SODIO_VALOR).v_Value1;
+                    var SODIO_VALOR_UNIDAD = electrolitos.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.SODIO_VALOR) == null ? "-" : electrolitos.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.SODIO_VALOR).v_MeasurementUnitName;
+                    var SODIO_DESEABLE = electrolitos.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.SODIO_DESEABLE) == null ? "-" : electrolitos.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.SODIO_DESEABLE).v_Value1;
+
+                    var POTASIO_VALOR = electrolitos.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.POTASIO_VALOR) == null ? "-" : electrolitos.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.POTASIO_VALOR).v_Value1;
+                    var POTASIO_VALOR_UNIDAD = electrolitos.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.POTASIO_VALOR) == null ? "-" : electrolitos.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.POTASIO_VALOR).v_MeasurementUnitName;
+                    var POTASIO_DESEABLE = electrolitos.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.POTASIO_DESEABLE) == null ? "-" : electrolitos.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.POTASIO_DESEABLE).v_Value1;
+
+                    var CLORO_VALOR = electrolitos.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CLORO_VALOR) == null ? "-" : electrolitos.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CLORO_VALOR).v_Value1;
+                    var CLORO_VALOR_UNIDAD = electrolitos.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CLORO_VALOR) == null ? "-" : electrolitos.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CLORO_VALOR).v_MeasurementUnitName;
+                    var CLORO_DESEABLE = electrolitos.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CLORO_DESEABLE) == null ? "-" : electrolitos.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CLORO_DESEABLE).v_Value1;
+
+
+                    cells = new List<PdfPCell>()
+                    {
+                        
+                        new PdfPCell(new Phrase("ELECTROLITOS SERICOS ", fontColumnValueBold)) { Colspan = 19, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda,  UseVariableBorders = true, BorderColorLeft = colorPlantilla, BorderColorRight = colorPlantilla, BorderColorBottom = colorPlantilla, BorderColorTop = colorPlantilla },                 
+
+                        new PdfPCell(new Phrase("   Sodio (Na)", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(SODIO_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(SODIO_DESEABLE, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(SODIO_VALOR_UNIDAD, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                       
+                        new PdfPCell(new Phrase("   Potasio (K)", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(POTASIO_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(POTASIO_DESEABLE, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(POTASIO_VALOR_UNIDAD, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        new PdfPCell(new Phrase("   Cloro (Cl)", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(CLORO_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(CLORO_DESEABLE, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(CLORO_VALOR_UNIDAD, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        new PdfPCell(new Phrase("Método: ISE", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER , VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                     };
+
+                    columnWidths = new float[] { 9f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 3f, 8f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+                    table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+                    document.Add(table);
+                }
+
+
+                if (colesterol != null)
+                {
+
+                    var COLESTEROL_VALOR = colesterol.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.COLESTEROL_VALOR) == null ? "-" : colesterol.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.COLESTEROL_VALOR).v_Value1;
+                    var COLESTEROL_VALOR_UNIDAD = colesterol.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.COLESTEROL_VALOR) == null ? "-" : colesterol.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.COLESTEROL_VALOR).v_MeasurementUnitName;
+                    var COLESTEROL_DESEABLE = colesterol.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.COLESTEROL_DESEABLE) == null ? "-" : colesterol.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.COLESTEROL_DESEABLE).v_Value1;
+
+
+                    cells = new List<PdfPCell>()
+                    {
+                        
+                        new PdfPCell(new Phrase("COLESTEROL TOTAL", fontColumnValueBold)) { Colspan = 19, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda,  UseVariableBorders = true, BorderColorLeft = colorPlantilla, BorderColorRight = colorPlantilla, BorderColorBottom = colorPlantilla, BorderColorTop = colorPlantilla },                 
+
+                        new PdfPCell(new Phrase("  Colesterol Total", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(COLESTEROL_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(COLESTEROL_DESEABLE, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(COLESTEROL_VALOR_UNIDAD, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                       
+                     };
+
+                    columnWidths = new float[] { 9f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 3f, 8f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+                    table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+                    document.Add(table);
+                }
+
+                if (trigliceridos != null)
+                {
+
+                    var TRIGLICERIDOS_VALOR = trigliceridos.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.TRIGLICERIDOS_LC_VALOR) == null ? "-" : trigliceridos.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.TRIGLICERIDOS_LC_VALOR).v_Value1;
+                    var TRIGLICERIDOS_VALOR_UNIDAD = trigliceridos.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.TRIGLICERIDOS_LC_VALOR) == null ? "-" : trigliceridos.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.TRIGLICERIDOS_LC_VALOR).v_MeasurementUnitName;
+                    var TRIGLICERIDOS_DESEABLE = trigliceridos.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.TRIGLICERIDOS_LC_DESEABLE) == null ? "-" : trigliceridos.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.TRIGLICERIDOS_LC_DESEABLE).v_Value1;
+
+
+                    cells = new List<PdfPCell>()
+                    {
+                        
+                        new PdfPCell(new Phrase("TRIGLICERIDOS", fontColumnValueBold)) { Colspan = 19, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda,  UseVariableBorders = true, BorderColorLeft = colorPlantilla, BorderColorRight = colorPlantilla, BorderColorBottom = colorPlantilla, BorderColorTop = colorPlantilla },                 
+
+                        new PdfPCell(new Phrase("  Trigliceridos", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(TRIGLICERIDOS_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(TRIGLICERIDOS_DESEABLE, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(TRIGLICERIDOS_VALOR_UNIDAD, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                       
+                     };
+
+                    columnWidths = new float[] { 9f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 3f, 8f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+                    table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+                    document.Add(table);
+                }
+
                 if (perfil_lipidico != null)
                 {
                     var PL_COLESTEROL_TOTAL = perfil_lipidico.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PL_COLESTEROL_TOTAL) == null ? "-" : perfil_lipidico.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PL_COLESTEROL_TOTAL).v_Value1;
@@ -379,6 +538,81 @@ namespace NetPdf
 
                         new PdfPCell(new Phrase("   Observaciones", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
                         new PdfPCell(new Phrase(PL_observaciones, fontColumnValue)) { Colspan = 11, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                       
+                     };
+
+                    columnWidths = new float[] { 9f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 3f, 8f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+                    table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+                    document.Add(table);
+                }
+
+                if (insulina_basal != null)
+                {
+
+                    var INSULINA_BASAL_VALOR = insulina_basal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.INSULINA_BASAL_VALOR) == null ? "-" : insulina_basal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.INSULINA_BASAL_VALOR).v_Value1;
+                    var INSULINA_BASAL_VALOR_UNIDAD = insulina_basal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.INSULINA_BASAL_VALOR) == null ? "-" : insulina_basal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.INSULINA_BASAL_VALOR).v_MeasurementUnitName;
+                    var INSULINA_BASAL_DESEABLE = insulina_basal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.INSULINA_BASAL_DESEABLE) == null ? "-" : insulina_basal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.INSULINA_BASAL_DESEABLE).v_Value1;
+
+
+                    cells = new List<PdfPCell>()
+                    {
+                        
+                        new PdfPCell(new Phrase("INSULINA BASAL", fontColumnValueBold)) { Colspan = 19, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda,  UseVariableBorders = true, BorderColorLeft = colorPlantilla, BorderColorRight = colorPlantilla, BorderColorBottom = colorPlantilla, BorderColorTop = colorPlantilla },                 
+
+                        new PdfPCell(new Phrase("  INSULINA BASAL \n  Metodo: ECLIA", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(INSULINA_BASAL_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(INSULINA_BASAL_DESEABLE, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(INSULINA_BASAL_VALOR_UNIDAD, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                       
+                     };
+
+                    columnWidths = new float[] { 9f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 3f, 8f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+                    table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+                    document.Add(table);
+                }
+
+                if (insulina_postpandrial != null)
+                {
+
+                    var INSULINA_POSTPANDRIAL_VALOR = insulina_postpandrial.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.INSULINA_POSTPANDRIAL_VALOR) == null ? "-" : insulina_postpandrial.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.INSULINA_POSTPANDRIAL_VALOR).v_Value1;
+                    var INSULINA_POSTPANDRIAL_VALOR_UNIDAD = insulina_postpandrial.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.INSULINA_POSTPANDRIAL_VALOR) == null ? "-" : insulina_postpandrial.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.INSULINA_POSTPANDRIAL_VALOR).v_MeasurementUnitName;
+                    var INSULINA_POSTPANDRIAL_DESEABLE = insulina_postpandrial.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.INSULINA_POSTPANDRIAL_DESEABLE) == null ? "-" : insulina_postpandrial.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.INSULINA_POSTPANDRIAL_DESEABLE).v_Value1;
+
+
+                    cells = new List<PdfPCell>()
+                    {
+                        
+                        new PdfPCell(new Phrase("INSULINA POST PANDRIAL", fontColumnValueBold)) { Colspan = 19, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda,  UseVariableBorders = true, BorderColorLeft = colorPlantilla, BorderColorRight = colorPlantilla, BorderColorBottom = colorPlantilla, BorderColorTop = colorPlantilla },                 
+
+                        new PdfPCell(new Phrase("  INSULINA POST PANDRIAL \n  Metodo: A-E-ECLIA", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(INSULINA_POSTPANDRIAL_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(INSULINA_POSTPANDRIAL_DESEABLE, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(INSULINA_POSTPANDRIAL_VALOR_UNIDAD, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                       
+                     };
+
+                    columnWidths = new float[] { 9f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 3f, 8f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+                    table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+                    document.Add(table);
+                }
+
+                if (lipasa != null)
+                {
+
+                    var LIPASA_VALOR = lipasa.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.LIPASA_VALOR) == null ? "-" : lipasa.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.LIPASA_VALOR).v_Value1;
+                    var LIPASA_VALOR_UNIDAD = lipasa.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.LIPASA_VALOR) == null ? "-" : lipasa.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.LIPASA_VALOR).v_MeasurementUnitName;
+                    var INSULINA_POSTPANDRIAL_DESEABLE = lipasa.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.LIPASA_DESEABLE) == null ? "-" : lipasa.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.LIPASA_DESEABLE).v_Value1;
+
+
+                    cells = new List<PdfPCell>()
+                    {
+                        
+                        new PdfPCell(new Phrase("LIPASA", fontColumnValueBold)) { Colspan = 19, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda,  UseVariableBorders = true, BorderColorLeft = colorPlantilla, BorderColorRight = colorPlantilla, BorderColorBottom = colorPlantilla, BorderColorTop = colorPlantilla },                 
+
+                        new PdfPCell(new Phrase("  Lipasa serica ", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(LIPASA_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(INSULINA_POSTPANDRIAL_DESEABLE, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(LIPASA_VALOR_UNIDAD, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
                        
                      };
 
@@ -538,8 +772,19 @@ namespace NetPdf
             ServiceComponentList grupo_factor = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.GRUPO_SANGUINEO_Y_FACTOR_RH_ID);
             ServiceComponentList prueba_Cruzada = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.PRUEBA_CRUZADA_ID);
 
+            ServiceComponentList perfil_neonatal = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.PERFIL_NEONATAL_ID);
+            ServiceComponentList tiempo_coagulacion_sangria = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.TIEMPO_DE_COAGULACION_Y_YSANGRIA_ID);
+            ServiceComponentList recuento_plaquetas = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.RECUENTO_DE_PLAQUETAS_ID);
 
-            if (hemograma != null || hemoglobina_hematocrito != null || grupo_factor != null || prueba_Cruzada != null)
+            ServiceComponentList tiempo_protombina = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.TIEMPO_DE_PROTOMBINA_ID);
+            ServiceComponentList tiempo_tromboplastina = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.TIEMPO_DE_TROMBOPLASTINA_ID);
+            ServiceComponentList fibrinogeno = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.FIBRINOGENO_ID);
+
+
+
+            if (hemograma != null || hemoglobina_hematocrito != null || grupo_factor != null || prueba_Cruzada != null
+                || perfil_neonatal != null || tiempo_coagulacion_sangria != null || recuento_plaquetas != null || tiempo_protombina != null
+                || tiempo_tromboplastina != null || fibrinogeno != null)
             {
                 cells = new List<PdfPCell>()
                 {
@@ -639,6 +884,52 @@ namespace NetPdf
                         new PdfPCell(new Phrase(HH_HEMATOCRITO_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_RIGHT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
                         new PdfPCell(new Phrase(HH_HEMATOCRITO_VALOR_DESEABLE, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
                         new PdfPCell(new Phrase(HH_HEMATOCRITO_VALOR_unidad, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                    };
+
+                    columnWidths = new float[] { 9f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 3f, 8f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+                    table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+                    document.Add(table);
+                }
+
+                if (perfil_neonatal != null)
+                {
+                    var GLUCOSA_PN = perfil_neonatal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.GLUCOSA_PN) == null ? "- - -" : perfil_neonatal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.GLUCOSA_PN).v_Value1;
+                    var GLUCOSA_PN_UNIDAD = perfil_neonatal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.GLUCOSA_PN) == null ? "- - -" : perfil_neonatal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.GLUCOSA_PN).v_MeasurementUnitName;
+                    var GLUCOSA_VALOR_PN = perfil_neonatal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.GLUCOSA_VALOR_PN) == null ? "- - -" : perfil_neonatal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.GLUCOSA_VALOR_PN).v_Value1;
+
+                    var HEMOGLOBINA_PN = perfil_neonatal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.HEMOGLOBINA_PN) == null ? "- - -" : perfil_neonatal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.HEMOGLOBINA_PN).v_Value1;
+                    var HEMOGLOBINA_PN_UNIDAD = perfil_neonatal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.HEMOGLOBINA_PN) == null ? "- - -" : perfil_neonatal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.HEMOGLOBINA_PN).v_MeasurementUnitName;
+                    var HEMOGLOBINA_VALOR_PN = perfil_neonatal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.HEMOGLOBINA_VALOR_PN) == null ? "- - -" : perfil_neonatal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.HEMOGLOBINA_VALOR_PN).v_Value1;
+
+                
+                    var GRUPO_S_PN = perfil_neonatal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.GRUPO_S_PN) == null ? "- - -" : perfil_neonatal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.GRUPO_S_PN).v_Value1Name;
+                    var FACTOR_RH_PN = perfil_neonatal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FACTOR_RH_PN) == null ? "- - -" : perfil_neonatal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FACTOR_RH_PN).v_Value1Name;
+
+                    cells = new List<PdfPCell>()
+                    {
+                        new PdfPCell(new Phrase("PERFIL NEO", fontColumnValueBold)) { Colspan = 19, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda,  UseVariableBorders = true, BorderColorLeft = colorPlantilla, BorderColorRight = colorPlantilla, BorderColorBottom = colorPlantilla, BorderColorTop = colorPlantilla },                 
+                        
+                        new PdfPCell(new Phrase("   HEMOGLOBINA:", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(HEMOGLOBINA_PN, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(HEMOGLOBINA_VALOR_PN, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(HEMOGLOBINA_PN_UNIDAD, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        new PdfPCell(new Phrase("   GLUCOSA:", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(GLUCOSA_PN, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(GLUCOSA_VALOR_PN, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(GLUCOSA_PN_UNIDAD, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+
+                        new PdfPCell(new Phrase("   Grupo sanguineo:", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(GRUPO_S_PN, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        
+                        new PdfPCell(new Phrase("   Factor Rh:", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(FACTOR_RH_PN, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
                     };
 
                     columnWidths = new float[] { 9f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 3f, 8f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
@@ -901,6 +1192,157 @@ namespace NetPdf
                     table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
                     document.Add(table);
                 }
+
+                if (tiempo_coagulacion_sangria != null)
+                {
+                    var tiempo_sangria_valor = tiempo_coagulacion_sangria.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.TIEMPO_DE__YSANGRIA_VALOR) == null ? "-" : tiempo_coagulacion_sangria.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.TIEMPO_DE__YSANGRIA_VALOR).v_Value1;
+                    var tiempo_sangria_valor_unidad = tiempo_coagulacion_sangria.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.TIEMPO_DE__YSANGRIA_VALOR) == null ? "-" : tiempo_coagulacion_sangria.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.TIEMPO_DE__YSANGRIA_VALOR).v_MeasurementUnitName;
+                    var tiempo_sangria_valor_deseable = tiempo_coagulacion_sangria.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.TIEMPO_DE__YSANGRIA_VALOR_DESEABLE) == null ? "-" : tiempo_coagulacion_sangria.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.TIEMPO_DE__YSANGRIA_VALOR_DESEABLE).v_Value1;
+
+                    var tiempo_coagulacion_valor = tiempo_coagulacion_sangria.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.TIEMPO_DE__COAGULACION_VALOR) == null ? "-" : tiempo_coagulacion_sangria.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.TIEMPO_DE__COAGULACION_VALOR).v_Value1;
+                    var tiempo_coagulacion_valor_unidad = tiempo_coagulacion_sangria.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.TIEMPO_DE__COAGULACION_VALOR) == null ? "-" : tiempo_coagulacion_sangria.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.TIEMPO_DE__COAGULACION_VALOR).v_MeasurementUnitName;
+                    var tiempo_coagulacion_valor_deseable = tiempo_coagulacion_sangria.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.TIEMPO_DE__COAGULACION_VALOR_DESEABLE) == null ? "-" : tiempo_coagulacion_sangria.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.TIEMPO_DE__COAGULACION_VALOR_DESEABLE).v_Value1;
+
+                    cells = new List<PdfPCell>()
+                    {
+                        new PdfPCell(new Phrase("TIEMPO DE SANGRIA, TIEMPO DE COAGULACION", fontColumnValueBold)) { Colspan = 19, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda,  UseVariableBorders = true, BorderColorLeft = colorPlantilla, BorderColorRight = colorPlantilla, BorderColorBottom = colorPlantilla, BorderColorTop = colorPlantilla },                 
+                        
+                        new PdfPCell(new Phrase("   Tiempo de sangria:", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(tiempo_sangria_valor, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(tiempo_sangria_valor_deseable, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(tiempo_sangria_valor_unidad, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        new PdfPCell(new Phrase("   Tiempo de coagulacion :", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(tiempo_coagulacion_valor, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(tiempo_coagulacion_valor_deseable, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(tiempo_coagulacion_valor_unidad, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                    };
+
+                    columnWidths = new float[] { 9f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 3f, 8f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+                    table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+                    document.Add(table);
+                }
+
+                if (tiempo_protombina != null)
+                {
+                    var TIEMPO_DE_PROTOMBINA_VALOR = tiempo_protombina.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.TIEMPO_DE_PROTOMBINA_VALOR) == null ? "-" : tiempo_protombina.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.TIEMPO_DE_PROTOMBINA_VALOR).v_Value1;
+                    var TIEMPO_DE_PROTOMBINA_VALOR_unidad = tiempo_protombina.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.TIEMPO_DE_PROTOMBINA_VALOR) == null ? "-" : tiempo_protombina.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.TIEMPO_DE_PROTOMBINA_VALOR).v_MeasurementUnitName;
+                    var TIEMPO_DE_PROTOMBINA_DESEADO = tiempo_protombina.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.TIEMPO_DE_PROTOMBINA_DESEADO) == null ? "-" : tiempo_protombina.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.TIEMPO_DE_PROTOMBINA_DESEADO).v_Value1;
+
+                    cells = new List<PdfPCell>()
+                    {
+                        new PdfPCell(new Phrase("Tiempo de protrombina\nINR", fontColumnValueBold)) { Colspan = 19, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda,  UseVariableBorders = true, BorderColorLeft = colorPlantilla, BorderColorRight = colorPlantilla, BorderColorBottom = colorPlantilla, BorderColorTop = colorPlantilla },                 
+                        
+                        new PdfPCell(new Phrase("   Tiempo de protrombina\n   INR:", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(TIEMPO_DE_PROTOMBINA_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(TIEMPO_DE_PROTOMBINA_DESEADO, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(TIEMPO_DE_PROTOMBINA_VALOR_unidad, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                    };
+
+                    columnWidths = new float[] { 9f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 3f, 8f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+                    table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+                    document.Add(table);
+                }
+
+                if (tiempo_tromboplastina != null)
+                {
+                    var TIEMPO_DE_TROMBOPLASTINA_VALOR = tiempo_tromboplastina.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.TIEMPO_DE_TROMBOPLASTINA_VALOR) == null ? "-" : tiempo_tromboplastina.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.TIEMPO_DE_TROMBOPLASTINA_VALOR).v_Value1;
+                    var TIEMPO_DE_TROMBOPLASTINA_VALOR_unidad = tiempo_tromboplastina.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.TIEMPO_DE_TROMBOPLASTINA_VALOR) == null ? "-" : tiempo_tromboplastina.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.TIEMPO_DE_TROMBOPLASTINA_VALOR).v_MeasurementUnitName;
+                    var TIEMPO_DE_TROMBOPLASTINA_DESEADO = tiempo_tromboplastina.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.TIEMPO_DE_TROMBOPLASTINA_DESEADO) == null ? "-" : tiempo_tromboplastina.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.TIEMPO_DE_TROMBOPLASTINA_DESEADO).v_Value1;
+
+                    cells = new List<PdfPCell>()
+                    {
+                        new PdfPCell(new Phrase("Tiempo parcial de tromboplastina activada", fontColumnValueBold)) { Colspan = 19, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda,  UseVariableBorders = true, BorderColorLeft = colorPlantilla, BorderColorRight = colorPlantilla, BorderColorBottom = colorPlantilla, BorderColorTop = colorPlantilla },                 
+                        
+                        new PdfPCell(new Phrase("   Tiempo parcial de tromboplastina activada:", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(TIEMPO_DE_TROMBOPLASTINA_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(TIEMPO_DE_TROMBOPLASTINA_DESEADO, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(TIEMPO_DE_TROMBOPLASTINA_VALOR_unidad, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                    };
+
+                    columnWidths = new float[] { 9f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 3f, 8f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+                    table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+                    document.Add(table);
+                }
+
+                if (fibrinogeno != null)
+                {
+                    var FIBRINOGENO_VALOR = fibrinogeno.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FIBRINOGENO_VALOR) == null ? "-" : fibrinogeno.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FIBRINOGENO_VALOR).v_Value1;
+                    var FIBRINOGENO_VALOR_unidad = fibrinogeno.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FIBRINOGENO_VALOR) == null ? "-" : fibrinogeno.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FIBRINOGENO_VALOR).v_MeasurementUnitName;
+                    var FIBRINOGENO_DESEADO = fibrinogeno.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FIBRINOGENO_DESEADO) == null ? "-" : fibrinogeno.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.FIBRINOGENO_DESEADO).v_Value1;
+
+                    cells = new List<PdfPCell>()
+                    {
+                        new PdfPCell(new Phrase("Tiempo parcial de tromboplastina activada", fontColumnValueBold)) { Colspan = 19, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda,  UseVariableBorders = true, BorderColorLeft = colorPlantilla, BorderColorRight = colorPlantilla, BorderColorBottom = colorPlantilla, BorderColorTop = colorPlantilla },                 
+                        
+                        new PdfPCell(new Phrase("   Tiempo parcial de tromboplastina activada:", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(FIBRINOGENO_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(FIBRINOGENO_DESEADO, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(FIBRINOGENO_VALOR_unidad, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                    };
+
+                    columnWidths = new float[] { 9f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 3f, 8f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+                    table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+                    document.Add(table);
+                }
+
+                if (recuento_plaquetas != null)
+                {
+                    var RECUENTO_DE_PLAQUETAS = recuento_plaquetas.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.RECUENTO_DE_PLAQUETAS) == null ? "-" : recuento_plaquetas.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.RECUENTO_DE_PLAQUETAS).v_Value1;
+                    var RECUENTO_DE_PLAQUETAS_unidad = recuento_plaquetas.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.RECUENTO_DE_PLAQUETAS) == null ? "-" : recuento_plaquetas.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.RECUENTO_DE_PLAQUETAS).v_MeasurementUnitName;
+                    var RECUENTO_DE_PLAQUETAS_VALOR = recuento_plaquetas.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.RECUENTO_DE_PLAQUETAS_VALOR) == null ? "-" : recuento_plaquetas.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.RECUENTO_DE_PLAQUETAS_VALOR).v_Value1;
+
+                    var VOLUMEN_PLAQUETARIO = recuento_plaquetas.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.VOLUMEN_PLAQUETARIO) == null ? "-" : recuento_plaquetas.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.VOLUMEN_PLAQUETARIO).v_Value1;
+                    var VOLUMEN_PLAQUETARIO_unidad = recuento_plaquetas.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.VOLUMEN_PLAQUETARIO) == null ? "-" : recuento_plaquetas.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.VOLUMEN_PLAQUETARIO).v_MeasurementUnitName;
+                    var VOLUMEN_PLAQUETARIO_VALOR = recuento_plaquetas.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.VOLUMEN_PLAQUETARIO_VALOR) == null ? "-" : recuento_plaquetas.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.VOLUMEN_PLAQUETARIO_VALOR).v_Value1;
+
+                    var ANCHO_DIST_PLAQUETARIA = recuento_plaquetas.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.ANCHO_DIST_PLAQUETARIA) == null ? "-" : recuento_plaquetas.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.ANCHO_DIST_PLAQUETARIA).v_Value1;
+                    var ANCHO_DIST_PLAQUETARIA_unidad = recuento_plaquetas.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.ANCHO_DIST_PLAQUETARIA) == null ? "-" : recuento_plaquetas.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.ANCHO_DIST_PLAQUETARIA).v_MeasurementUnitName;
+                    var ANCHO_DIST_PLAQUETARIA_VALOR = recuento_plaquetas.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.ANCHO_DIST_PLAQUETARIA_VALOR) == null ? "-" : recuento_plaquetas.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.ANCHO_DIST_PLAQUETARIA_VALOR).v_Value1;
+
+                    var PLAQUETOCRITO = recuento_plaquetas.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PLAQUETOCRITO) == null ? "-" : recuento_plaquetas.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PLAQUETOCRITO).v_Value1;
+                    var PLAQUETOCRITO_unidad = recuento_plaquetas.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PLAQUETOCRITO) == null ? "-" : recuento_plaquetas.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PLAQUETOCRITO).v_MeasurementUnitName;
+                    var PLAQUETOCRITO_VALOR = recuento_plaquetas.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PLAQUETOCRITO_VALOR) == null ? "-" : recuento_plaquetas.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PLAQUETOCRITO_VALOR).v_Value1;
+
+                    var DESCR_REC_PLAQ = recuento_plaquetas.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.DESCR_REC_PLAQ) == null ? "-" : recuento_plaquetas.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.DESCR_REC_PLAQ).v_Value1;
+
+                    cells = new List<PdfPCell>()
+                    {
+                        new PdfPCell(new Phrase("RECUENTO DE PLAQUETAS", fontColumnValueBold)) { Colspan = 19, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda,  UseVariableBorders = true, BorderColorLeft = colorPlantilla, BorderColorRight = colorPlantilla, BorderColorBottom = colorPlantilla, BorderColorTop = colorPlantilla },                 
+                        
+                        new PdfPCell(new Phrase("   PLAQUETAS RECUENTO:", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(RECUENTO_DE_PLAQUETAS, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(RECUENTO_DE_PLAQUETAS_VALOR, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(RECUENTO_DE_PLAQUETAS_unidad, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        new PdfPCell(new Phrase("   VOLUMEN PLAQUETARIO MEDIO :", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(VOLUMEN_PLAQUETARIO, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(ANCHO_DIST_PLAQUETARIA_VALOR, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(ANCHO_DIST_PLAQUETARIA_unidad, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        new PdfPCell(new Phrase("   PLAQUETAS RECUENTO:", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(ANCHO_DIST_PLAQUETARIA, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(ANCHO_DIST_PLAQUETARIA_VALOR, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(ANCHO_DIST_PLAQUETARIA_unidad, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        new PdfPCell(new Phrase("   VOLUMEN PLAQUETARIO MEDIO :", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(PLAQUETOCRITO, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(PLAQUETOCRITO_VALOR, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(PLAQUETOCRITO_unidad, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        new PdfPCell(new Phrase("   Observacion:", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(DESCR_REC_PLAQ, fontColumnValue)) { Colspan = 11, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                    };
+
+                    columnWidths = new float[] { 9f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 3f, 8f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+                    table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+                    document.Add(table);
+                }
             }
 
 
@@ -1100,9 +1542,11 @@ namespace NetPdf
             ServiceComponentList reaccion_inflamatoria = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.REACCION_INFLAMATORIA_ID_);
             ServiceComponentList koh = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.KOH_ID);
             ServiceComponentList test_graham = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.TEST_GRAHAM_ID);
+            ServiceComponentList coprofuncional = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.COPROFUNCIONAL_ID);
 
 
-            if (parasitologico_seriado != null || parasitologico_simple  != null || thevenon_simple != null || reaccion_inflamatoria != null || koh != null || test_graham != null)
+            if (parasitologico_seriado != null || parasitologico_simple  != null || thevenon_simple != null || reaccion_inflamatoria != null
+                || koh != null || test_graham != null || coprofuncional != null)
             {
 
                 cells = new List<PdfPCell>()
@@ -1415,6 +1859,126 @@ namespace NetPdf
                     document.Add(table);
                 }
 
+
+                if (coprofuncional != null)
+                {
+
+                    var CP_COLOR = coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_COLOR) == null ? "-" : coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_COLOR).v_Value1;
+                    var CP_ASPECTO = coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_ASPECTO) == null ? "-" : coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_ASPECTO).v_Value1;
+                    var CP_CONSISTENCIA = coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_CONSISTENCIA) == null ? "-" : coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_CONSISTENCIA).v_Value1;
+                    var CP_PRESENCIA_SANGRE = coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_PRESENCIA_SANGRE) == null ? "-" : coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_PRESENCIA_SANGRE).v_Value1;
+                    var CP_PRESENCIA_MOCO = coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_PRESENCIA_MOCO) == null ? "-" : coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_PRESENCIA_MOCO).v_Value1;
+
+                    var CP_PH = coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_PH) == null ? "-" : coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_PH).v_Value1;
+                    var CP_PH_DESEABLE = coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_PH_DESEABLE) == null ? "-" : coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_PH_DESEABLE).v_Value1;
+                    var CP_SUSTANCIAS_REDUCTORAS = coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_SUSTANCIAS_REDUCTORAS) == null ? "-" : coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_SUSTANCIAS_REDUCTORAS).v_Value1;
+                    var CP_SUSTANCIAS_REDUCTORAS_DESEABLE = coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_SUSTANCIAS_REDUCTORAS_DESEABLE) == null ? "-" : coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_SUSTANCIAS_REDUCTORAS_DESEABLE).v_Value1;
+                    var CP_SANGRE_OCULTA = coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_SANGRE_OCULTA) == null ? "-" : coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_SANGRE_OCULTA).v_Value1;
+                    var CP_SANGRE_OCULTA_DESEABLE = coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_SANGRE_OCULTA_DESEABLE) == null ? "-" : coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_SANGRE_OCULTA_DESEABLE).v_Value1;
+
+                    var CP_CELULAR_INFLAMATORIAS = coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_CELULAR_INFLAMATORIAS) == null ? "-" : coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_CELULAR_INFLAMATORIAS).v_Value1;
+                    var CP_HEMATIES = coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_HEMATIES) == null ? "-" : coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_HEMATIES).v_Value1;
+                    var CP_GRASAS = coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_GRASAS) == null ? "-" : coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_GRASAS).v_Value1;
+                    var CP_FIBRAS_MUSCULARES = coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_FIBRAS_MUSCULARES) == null ? "-" : coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_FIBRAS_MUSCULARES).v_Value1;
+                    var CP_RESTOS_ALIMENTICIOS = coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_RESTOS_ALIMENTICIOS) == null ? "-" : coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_RESTOS_ALIMENTICIOS).v_Value1;
+                    var CP_BACTERIAS = coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_BACTERIAS) == null ? "-" : coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_BACTERIAS).v_Value1;
+                    var CP_HONGOS = coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_HONGOS) == null ? "-" : coprofuncional.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.CP_HONGOS).v_Value1;
+
+
+                    cells = new List<PdfPCell>()
+                    {
+                        
+                        new PdfPCell(new Phrase("COPROFUNCIONAL", fontColumnValueBold)) { Colspan = 19, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda,  UseVariableBorders = true, BorderColorLeft = colorPlantilla, BorderColorRight = colorPlantilla, BorderColorBottom = colorPlantilla, BorderColorTop = colorPlantilla },                 
+
+                        new PdfPCell(new Phrase(" MACROSCOPIA", fontColumnValueBold)) { Colspan = 19, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        new PdfPCell(new Phrase("   Color", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(CP_COLOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        new PdfPCell(new Phrase("   Aspecto", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(CP_ASPECTO, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        new PdfPCell(new Phrase("   Consistencia", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(CP_CONSISTENCIA, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        new PdfPCell(new Phrase("   Presencia de sangre", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(CP_PRESENCIA_SANGRE, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        new PdfPCell(new Phrase("   Presencia de moco", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(CP_PRESENCIA_MOCO, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        new PdfPCell(new Phrase(" MACROSCOPIA", fontColumnValueBold)) { Colspan = 19, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        new PdfPCell(new Phrase("   ph", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(CP_PH, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(CP_PH_DESEABLE, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        new PdfPCell(new Phrase("   Sustancias Reductoras", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(CP_SUSTANCIAS_REDUCTORAS, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(CP_SUSTANCIAS_REDUCTORAS_DESEABLE, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        new PdfPCell(new Phrase("   Sangre oculta", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(CP_SANGRE_OCULTA, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(CP_SANGRE_OCULTA_DESEABLE, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        new PdfPCell(new Phrase(" MICROSCOPICO", fontColumnValueBold)) { Colspan = 19, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        new PdfPCell(new Phrase("   Celulas inflamatorias (Leucocitos)", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(CP_CELULAR_INFLAMATORIAS, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        new PdfPCell(new Phrase("   Hematíes", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(CP_HEMATIES, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        new PdfPCell(new Phrase("   Grasas (Lípidos)", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(CP_GRASAS, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        new PdfPCell(new Phrase("   Fibras musculares", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(CP_FIBRAS_MUSCULARES, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        new PdfPCell(new Phrase("   Restos alimenticios", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(CP_RESTOS_ALIMENTICIOS, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        new PdfPCell(new Phrase("   Bacterias", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(CP_BACTERIAS, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        new PdfPCell(new Phrase("   Hongos", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(CP_HONGOS, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        
+                     };
+
+                    columnWidths = new float[] { 9f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 3f, 8f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+                    table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+                    document.Add(table);
+                }
+
                
 
             }
@@ -1426,14 +1990,31 @@ namespace NetPdf
 
             ServiceComponentList bhcg_cualitativo = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.BHCG_CUALITATIVO_ID);
 
+            ServiceComponentList bhcg_cuantitativo = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.BHCG_CUANTITATIVO_ID);
+
+
             ServiceComponentList aglutinaciones_lamina = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.AGLUTINACIONES_LAMINA_LC);
 
             ServiceComponentList vdrl = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.VDRL_LC);
 
+            ServiceComponentList PCR_PROTEINA_C_REACTIVA_CUALITATIVA = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.PCR_PROTEINA_C_REACTIVA_CUALITATIVA_ID);
             ServiceComponentList PCR_PROTEINA_C_REACTIVA_CUANTITATIVA = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.PCR_PROTEINA_C_REACTIVA_CUANTITATIVA_ID);
 
+            ServiceComponentList psa_total = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.PSA_ID);
 
-            if (bhcg_cualitativo != null || hemoglobina_glicosilada != null || aglutinaciones_lamina != null || vdrl != null || PCR_PROTEINA_C_REACTIVA_CUANTITATIVA != null)
+            ServiceComponentList sars_cov_2 = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.SARS_COV_2_ID);
+
+            ServiceComponentList sifilis = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.SIFILIS_ID);
+
+            ServiceComponentList perfil_tiroideo_total = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.PERFIL_TIROIDEO_T_ID);
+            ServiceComponentList perfil_tiroideo_libre = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.PERFIL_TIROIDEO_L_ID);
+            ServiceComponentList hiv_4_gen = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.HIV_4_GEN_ID);
+
+            ServiceComponentList hepatitisB = serviceComponent.Find(p => p.v_ComponentId == Sigesoft.Common.Constants.HEPATITIS_B_ID);
+
+            if (bhcg_cualitativo != null || bhcg_cuantitativo  != null|| hemoglobina_glicosilada != null || aglutinaciones_lamina != null || vdrl != null
+                || PCR_PROTEINA_C_REACTIVA_CUALITATIVA != null || PCR_PROTEINA_C_REACTIVA_CUANTITATIVA  != null|| psa_total != null || sars_cov_2 != null || sifilis != null || perfil_tiroideo_total != null
+                || perfil_tiroideo_libre != null || hiv_4_gen != null || hepatitisB != null)
             {
 
                 cells = new List<PdfPCell>()
@@ -1447,6 +2028,51 @@ namespace NetPdf
                 columnWidths = new float[] { 9f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 3f, 8f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
                 table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
                 document.Add(table);
+
+
+                if (vdrl != null)
+                {
+                    var VDRL_VALOR_LC = vdrl.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.VDRL_VALOR_LC) == null ? "- - -" : vdrl.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.VDRL_VALOR_LC).v_Value1;
+
+                    cells = new List<PdfPCell>()
+                    {
+                        new PdfPCell(new Phrase("VDRL (CUALITATIVO)", fontColumnValueBold)) { Colspan = 19, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda,  UseVariableBorders = true, BorderColorLeft = colorPlantilla, BorderColorRight = colorPlantilla, BorderColorBottom = colorPlantilla, BorderColorTop = colorPlantilla },                 
+                        
+                        new PdfPCell(new Phrase("   VDRL:", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(VDRL_VALOR_LC, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                     };
+
+                    columnWidths = new float[] { 9f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 3f, 8f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+                    table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+                    document.Add(table);
+                }
+
+                if (hiv_4_gen != null)
+                {
+
+                    var HIV_4_GEN_VALOR = hiv_4_gen.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.HIV_4_GEN_VALOR) == null ? "-" : hiv_4_gen.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.HIV_4_GEN_VALOR).v_Value1;
+
+
+                    cells = new List<PdfPCell>()
+                    {
+                        
+                        new PdfPCell(new Phrase("HIV", fontColumnValueBold)) { Colspan = 19, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda,  UseVariableBorders = true, BorderColorLeft = colorPlantilla, BorderColorRight = colorPlantilla, BorderColorBottom = colorPlantilla, BorderColorTop = colorPlantilla },                 
+
+
+                        new PdfPCell(new Phrase("   HIV  4TA GENERACION", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(HIV_4_GEN_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        
+                     };
+
+                    columnWidths = new float[] { 9f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 3f, 8f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+                    table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+                    document.Add(table);
+                }
 
                 if (bhcg_cualitativo != null)
                 {
@@ -1472,6 +2098,56 @@ namespace NetPdf
                     table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
                     document.Add(table);
                 }
+
+                if (bhcg_cuantitativo != null)
+                {
+
+                    var BHCG_CUANTITATIVO_VALOR = bhcg_cuantitativo.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.BHCG_CUANTITATIVO_VALOR) == null ? "-" : bhcg_cuantitativo.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.BHCG_CUANTITATIVO_VALOR).v_Value1;
+                    var BHCG_CUANTITATIVO_VALOR_UNIDAD = bhcg_cuantitativo.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.BHCG_CUANTITATIVO_VALOR) == null ? "-" : bhcg_cuantitativo.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.BHCG_CUANTITATIVO_VALOR).v_MeasurementUnitName;
+                    var BHCG_CUANTITATIVO_DESEADO = bhcg_cuantitativo.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.BHCG_CUANTITATIVO_DESEADO) == null ? "-" : bhcg_cuantitativo.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.BHCG_CUANTITATIVO_DESEADO).v_Value1;
+
+
+                    cells = new List<PdfPCell>()
+                    {
+                        
+                        new PdfPCell(new Phrase("PRUEBA DE EMBARAZO", fontColumnValueBold)) { Colspan = 19, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda,  UseVariableBorders = true, BorderColorLeft = colorPlantilla, BorderColorRight = colorPlantilla, BorderColorBottom = colorPlantilla, BorderColorTop = colorPlantilla },                 
+                        
+                        new PdfPCell(new Phrase("   Beta HCG - cuantitativo", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(BHCG_CUANTITATIVO_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(BHCG_CUANTITATIVO_DESEADO, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(BHCG_CUANTITATIVO_VALOR_UNIDAD, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        
+                     };
+
+                    columnWidths = new float[] { 9f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 3f, 8f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+                    table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+                    document.Add(table);
+                }
+
+                if (hepatitisB != null)
+                {
+
+                    var HEPATITIS_B_VALOR = hepatitisB.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.HEPATITIS_B_VALOR) == null ? "-" : hepatitisB.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.HEPATITIS_B_VALOR).v_Value1;
+                    
+                    cells = new List<PdfPCell>()
+                    {
+                        
+                        new PdfPCell(new Phrase("HEPATITIS B", fontColumnValueBold)) { Colspan = 19, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda,  UseVariableBorders = true, BorderColorLeft = colorPlantilla, BorderColorRight = colorPlantilla, BorderColorBottom = colorPlantilla, BorderColorTop = colorPlantilla },                 
+                        
+                        new PdfPCell(new Phrase("   ANTIGENO AUSTRALIANO -HEPATITIS B", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(HEPATITIS_B_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        
+                     };
+
+                    columnWidths = new float[] { 9f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 3f, 8f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+                    table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+                    document.Add(table);
+                }
+
 
                 if (hemoglobina_glicosilada != null)
                 {
@@ -1549,35 +2225,20 @@ namespace NetPdf
                     document.Add(table);
                 }
 
-                if (vdrl != null)
+
+
+
+
+                if (PCR_PROTEINA_C_REACTIVA_CUALITATIVA != null)
                 {
-                    var VDRL_VALOR_LC = vdrl.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.VDRL_VALOR_LC) == null ? "- - -" : vdrl.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.VDRL_VALOR_LC).v_Value1;
-
-                    cells = new List<PdfPCell>()
-                    {
-                        new PdfPCell(new Phrase("VDRL (CUALITATIVO)", fontColumnValueBold)) { Colspan = 19, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda,  UseVariableBorders = true, BorderColorLeft = colorPlantilla, BorderColorRight = colorPlantilla, BorderColorBottom = colorPlantilla, BorderColorTop = colorPlantilla },                 
-                        
-                        new PdfPCell(new Phrase("   VDRL:", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
-                        new PdfPCell(new Phrase(VDRL_VALOR_LC, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
-                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
-                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
-                     };
-
-                    columnWidths = new float[] { 9f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 3f, 8f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
-                    table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
-                    document.Add(table);
-                }
-
-                if (PCR_PROTEINA_C_REACTIVA_CUANTITATIVA != null)
-                {
-                    var PCR_PROTEINA_C_REACTIVA_CUANTITATIVA_VALOR = PCR_PROTEINA_C_REACTIVA_CUANTITATIVA.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PCR_PROTEINA_C_REACTIVA_CUANTITATIVA_VALOR) == null ? "- - -" : PCR_PROTEINA_C_REACTIVA_CUANTITATIVA.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PCR_PROTEINA_C_REACTIVA_CUANTITATIVA_VALOR).v_Value1;
+                    var PCR_PROTEINA_C_REACTIVA_CUALITATIVA_VALOR = PCR_PROTEINA_C_REACTIVA_CUALITATIVA.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PCR_PROTEINA_C_REACTIVA_CUALITATIVA_VALOR) == null ? "- - -" : PCR_PROTEINA_C_REACTIVA_CUALITATIVA.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PCR_PROTEINA_C_REACTIVA_CUALITATIVA_VALOR).v_Value1;
 
                     cells = new List<PdfPCell>()
                     {
                         new PdfPCell(new Phrase("PROTEINA C REACTIVA", fontColumnValueBold)) { Colspan = 19, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda,  UseVariableBorders = true, BorderColorLeft = colorPlantilla, BorderColorRight = colorPlantilla, BorderColorBottom = colorPlantilla, BorderColorTop = colorPlantilla },                 
                         
                         new PdfPCell(new Phrase("   PROTEINA C REACTIVA \n   (CUALITATIVO):", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
-                        new PdfPCell(new Phrase(PCR_PROTEINA_C_REACTIVA_CUANTITATIVA_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(PCR_PROTEINA_C_REACTIVA_CUALITATIVA_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
                         new PdfPCell(new Phrase("Negativo", fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
                         new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
                      };
@@ -1587,6 +2248,171 @@ namespace NetPdf
                     document.Add(table);
                 }
 
+
+                if (PCR_PROTEINA_C_REACTIVA_CUANTITATIVA != null)
+                {
+                    var PCR_PROTEINA_C_REACTIVA_CUANTITATIVA_VALOR = PCR_PROTEINA_C_REACTIVA_CUANTITATIVA.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PCR_PROTEINA_C_REACTIVA_CUANTITATIVA_VALOR) == null ? "-" : PCR_PROTEINA_C_REACTIVA_CUANTITATIVA.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PCR_PROTEINA_C_REACTIVA_CUANTITATIVA_VALOR).v_Value1;
+                    var PCR_PROTEINA_C_REACTIVA_CUANTITATIVA_VALOR_UNIDAD = PCR_PROTEINA_C_REACTIVA_CUANTITATIVA.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PCR_PROTEINA_C_REACTIVA_CUANTITATIVA_VALOR) == null ? "-" : PCR_PROTEINA_C_REACTIVA_CUANTITATIVA.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PCR_PROTEINA_C_REACTIVA_CUANTITATIVA_VALOR).v_MeasurementUnitName;
+                    var PCR_PROTEINA_C_REACTIVA_CUANTITATIVA_DESEABLE = PCR_PROTEINA_C_REACTIVA_CUANTITATIVA.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PCR_PROTEINA_C_REACTIVA_CUANTITATIVA_DESEABLE) == null ? "-" : PCR_PROTEINA_C_REACTIVA_CUANTITATIVA.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PCR_PROTEINA_C_REACTIVA_CUANTITATIVA_DESEABLE).v_Value1;
+
+                    cells = new List<PdfPCell>()
+                    {
+                        new PdfPCell(new Phrase("PROTEINA C REACTIVA (CUANTITATIVO)", fontColumnValueBold)) { Colspan = 19, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda,  UseVariableBorders = true, BorderColorLeft = colorPlantilla, BorderColorRight = colorPlantilla, BorderColorBottom = colorPlantilla, BorderColorTop = colorPlantilla },                 
+                        
+                        new PdfPCell(new Phrase("   PROTEINA C REACTIVA:", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(PCR_PROTEINA_C_REACTIVA_CUANTITATIVA_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(PCR_PROTEINA_C_REACTIVA_CUANTITATIVA_DESEABLE, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(PCR_PROTEINA_C_REACTIVA_CUANTITATIVA_VALOR_UNIDAD, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                     };
+
+                    columnWidths = new float[] { 9f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 3f, 8f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+                    table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+                    document.Add(table);
+                }
+
+
+                if (psa_total != null)
+                {
+                    var PSA_VALOR = psa_total.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PSA_VALOR) == null ? "-" : psa_total.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PSA_VALOR).v_Value1;
+                    var PSA_VALOR_UNIDAD = psa_total.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PSA_VALOR) == null ? "-" : psa_total.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PSA_VALOR).v_MeasurementUnitName;
+                    var PSA_VALOR_DESEABLE = psa_total.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PSA_VALOR_DESEABLE) == null ? "-" : psa_total.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PSA_VALOR_DESEABLE).v_Value1;
+
+                    cells = new List<PdfPCell>()
+                    {
+                        new PdfPCell(new Phrase("PSA (ANTIGENO PROSTATICO ESPECIFICO)", fontColumnValueBold)) { Colspan = 19, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda,  UseVariableBorders = true, BorderColorLeft = colorPlantilla, BorderColorRight = colorPlantilla, BorderColorBottom = colorPlantilla, BorderColorTop = colorPlantilla },                 
+                        
+                        new PdfPCell(new Phrase("   PSA TOTAL \n   (Método: Quimioluminiscencia):", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(PSA_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(PSA_VALOR_DESEABLE, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(PSA_VALOR_UNIDAD, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                     };
+
+                    columnWidths = new float[] { 9f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 3f, 8f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+                    table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+                    document.Add(table);
+                }
+
+                if (sars_cov_2 != null)
+                {
+                    var SARS_COV_2_VALOR = sars_cov_2.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.SARS_COV_2_VALOR) == null ? "-" : sars_cov_2.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.SARS_COV_2_VALOR).v_Value1;
+                    
+                    cells = new List<PdfPCell>()
+                    {
+                        new PdfPCell(new Phrase("COVID-19", fontColumnValueBold)) { Colspan = 19, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda,  UseVariableBorders = true, BorderColorLeft = colorPlantilla, BorderColorRight = colorPlantilla, BorderColorBottom = colorPlantilla, BorderColorTop = colorPlantilla },                 
+                        
+                        new PdfPCell(new Phrase("   Prueba rápida de antígeno SARS-CoV-2 \n   Método: Inmunocromatografía:", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(SARS_COV_2_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                     };
+
+                    columnWidths = new float[] { 9f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 3f, 8f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+                    table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+                    document.Add(table);
+                }
+
+                if (sifilis != null)
+                {
+                    var SIFILIS_VALOR = sifilis.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.SIFILIS_VALOR) == null ? "-" : sifilis.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.SIFILIS_VALOR).v_Value1Name;
+                    var SIFILIS_DESEADO = sifilis.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.SIFILIS_DESEADO) == null ? "-" : sifilis.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.SIFILIS_DESEADO).v_Value1;
+
+                    cells = new List<PdfPCell>()
+                    {
+                        new PdfPCell(new Phrase("Prueba de Sífilis", fontColumnValueBold)) { Colspan = 19, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda,  UseVariableBorders = true, BorderColorLeft = colorPlantilla, BorderColorRight = colorPlantilla, BorderColorBottom = colorPlantilla, BorderColorTop = colorPlantilla },                 
+                        
+                        new PdfPCell(new Phrase("   Sífilis (IgG, IgM, IgA)\n   Método: Inmunocromatografía:", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(SIFILIS_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(SIFILIS_DESEADO, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase("", fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                     };
+
+                    columnWidths = new float[] { 9f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 3f, 8f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+                    table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+                    document.Add(table);
+                }
+
+                if (perfil_tiroideo_total != null)
+                {
+                    var PTT_T3_VALOR = perfil_tiroideo_total.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTT_T3_VALOR) == null ? "-" : perfil_tiroideo_total.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTT_T3_VALOR).v_Value1;
+                    var PTT_T3_VALOR_UNIDAD = perfil_tiroideo_total.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTT_T3_VALOR) == null ? "-" : perfil_tiroideo_total.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTT_T3_VALOR).v_MeasurementUnitName;
+                    var PTT_T3_VALOR_DESEADO = perfil_tiroideo_total.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTT_T3_VALOR_DESEADO) == null ? "-" : perfil_tiroideo_total.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTT_T3_VALOR_DESEADO).v_Value1;
+
+                    var PTT_T4_VALOR = perfil_tiroideo_total.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTT_T4_VALOR) == null ? "-" : perfil_tiroideo_total.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTT_T4_VALOR).v_Value1;
+                    var PTT_T4_VALOR_UNIDAD = perfil_tiroideo_total.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTT_T4_VALOR) == null ? "-" : perfil_tiroideo_total.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTT_T4_VALOR).v_MeasurementUnitName;
+                    var PTT_T4_VALOR_DESEADO = perfil_tiroideo_total.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTT_T4_VALOR_DESEADO) == null ? "-" : perfil_tiroideo_total.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTT_T4_VALOR_DESEADO).v_Value1;
+
+                    var PTT_TSH_VALOR = perfil_tiroideo_total.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTT_TSH_VALOR) == null ? "-" : perfil_tiroideo_total.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTT_TSH_VALOR).v_Value1;
+                    var PTT_TSH_VALOR_UNIDAD = perfil_tiroideo_total.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTT_TSH_VALOR) == null ? "-" : perfil_tiroideo_total.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTT_TSH_VALOR).v_MeasurementUnitName;
+                    var PTT_TSH_VALOR_DESEADO = perfil_tiroideo_total.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTT_TSH_VALOR_DESEADO) == null ? "-" : perfil_tiroideo_total.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTT_TSH_VALOR_DESEADO).v_Value1;
+
+                    cells = new List<PdfPCell>()
+                    {
+                        new PdfPCell(new Phrase("PERFIL TIROIDEO TOTAL", fontColumnValueBold)) { Colspan = 19, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda,  UseVariableBorders = true, BorderColorLeft = colorPlantilla, BorderColorRight = colorPlantilla, BorderColorBottom = colorPlantilla, BorderColorTop = colorPlantilla },                 
+                        
+                        new PdfPCell(new Phrase("   TSH ultrasensible:", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(PTT_TSH_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(PTT_TSH_VALOR_DESEADO, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(PTT_TSH_VALOR_UNIDAD, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        new PdfPCell(new Phrase("   T3 total:", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(PTT_T3_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(PTT_T3_VALOR_DESEADO, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(PTT_T3_VALOR_UNIDAD, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        new PdfPCell(new Phrase("   T4 total:", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(PTT_T4_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(PTT_T4_VALOR_DESEADO, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(PTT_T4_VALOR_UNIDAD, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                    };
+
+                    columnWidths = new float[] { 9f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 3f, 8f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+                    table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+                    document.Add(table);
+                }
+
+                if (perfil_tiroideo_libre != null)
+                {
+                    var PTL_T3_VALOR = perfil_tiroideo_libre.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTL_T3_VALOR) == null ? "-" : perfil_tiroideo_libre.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTL_T3_VALOR).v_Value1;
+                    var PTL_T3_VALOR_UNIDAD = perfil_tiroideo_libre.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTL_T3_VALOR) == null ? "-" : perfil_tiroideo_libre.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTL_T3_VALOR).v_MeasurementUnitName;
+                    var PTL_T3_VALOR_DESEADO = perfil_tiroideo_libre.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTL_T3_VALOR_DESEADO) == null ? "-" : perfil_tiroideo_libre.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTL_T3_VALOR_DESEADO).v_Value1;
+
+                    var PTL_T4_VALOR = perfil_tiroideo_libre.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTL_T4_VALOR) == null ? "-" : perfil_tiroideo_libre.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTL_T4_VALOR).v_Value1;
+                    var PTL_T4_VALOR_UNIDAD = perfil_tiroideo_libre.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTL_T4_VALOR) == null ? "-" : perfil_tiroideo_libre.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTL_T4_VALOR).v_MeasurementUnitName;
+                    var PTL_T4_VALOR_DESEADO = perfil_tiroideo_libre.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTL_T4_VALOR_DESEADO) == null ? "-" : perfil_tiroideo_libre.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTL_T4_VALOR_DESEADO).v_Value1;
+
+                    var PTL_TSH_VALOR = perfil_tiroideo_libre.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTL_TSH_VALOR) == null ? "-" : perfil_tiroideo_libre.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTL_TSH_VALOR).v_Value1;
+                    var PTL_TSH_VALOR_UNIDAD = perfil_tiroideo_libre.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTL_TSH_VALOR) == null ? "-" : perfil_tiroideo_libre.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTL_TSH_VALOR).v_MeasurementUnitName;
+                    var PTL_TSH_VALOR_DESEADO = perfil_tiroideo_libre.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTL_TSH_VALOR_DESEADO) == null ? "-" : perfil_tiroideo_libre.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PTL_TSH_VALOR_DESEADO).v_Value1;
+
+                    cells = new List<PdfPCell>()
+                    {
+                        new PdfPCell(new Phrase("PERFIL TIROIDEO LIBRE", fontColumnValueBold)) { Colspan = 19, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda,  UseVariableBorders = true, BorderColorLeft = colorPlantilla, BorderColorRight = colorPlantilla, BorderColorBottom = colorPlantilla, BorderColorTop = colorPlantilla },                 
+                        
+                        new PdfPCell(new Phrase("   TSH ultrasensible:", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(PTL_TSH_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(PTL_TSH_VALOR_DESEADO, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(PTL_TSH_VALOR_UNIDAD, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        new PdfPCell(new Phrase("   T3 total:", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(PTL_T3_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(PTL_T3_VALOR_DESEADO, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(PTL_T3_VALOR_UNIDAD, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                        new PdfPCell(new Phrase("   T4 total:", fontColumnValue)) { Colspan = 8, HorizontalAlignment = iTextSharp.text.Element.ALIGN_LEFT, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(PTL_T4_VALOR, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(PTL_T4_VALOR_DESEADO, fontColumnValue)) { Colspan = 5, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+                        new PdfPCell(new Phrase(PTL_T4_VALOR_UNIDAD, fontColumnValue)) { Colspan = 3, HorizontalAlignment = iTextSharp.text.Element.ALIGN_CENTER, VerticalAlignment = iTextSharp.text.Element.ALIGN_MIDDLE, MinimumHeight = tamaño_celda_1, Border = PdfPCell.NO_BORDER},    
+
+                    };
+
+                    columnWidths = new float[] { 9f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 3f, 8f, 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f };
+                    table = HandlingItextSharp.GenerateTableFromCells(cells, columnWidths, null, fontTitleTable);
+                    document.Add(table);
+                }
+
+
+                
             }
 
             #endregion
