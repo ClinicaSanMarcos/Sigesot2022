@@ -728,14 +728,13 @@ namespace NetPdf
                     var PR_UREA = perfil_renal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PR_UREA) == null ? "-" : perfil_renal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PR_UREA).v_Value1;
                     var PR_UREA_unidad = perfil_renal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PR_UREA) == null ? "-" : perfil_renal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PR_UREA).v_MeasurementUnitName;
                     var PR_UREA_DESEABLE = perfil_renal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PR_UREA_DESEABLE) == null ? "-" : perfil_renal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PR_UREA_DESEABLE).v_Value1;
-
-
+                    
                     var PR_CREATININA = perfil_renal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PR_CREATININA) == null ? "-" : perfil_renal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PR_CREATININA).v_Value1;
                     var PR_CREATININA_unidad = perfil_renal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PR_CREATININA) == null ? "-" : perfil_renal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PR_CREATININA).v_MeasurementUnitName;
                     var PR_CREATININA_DESEABLE = perfil_renal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PR_CREATININA_DESEABLE) == null ? "-" : perfil_renal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PR_CREATININA_DESEABLE).v_Value1;
 
 
-                    var PR_observaciones = perfil_lipidico.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PR_observaciones) == null ? "-" : perfil_lipidico.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PR_observaciones).v_Value1;
+                    var PR_observaciones = perfil_renal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PR_observaciones) == null ? "-" : perfil_renal.ServiceComponentFields.Find(p => p.v_ComponentFieldsId == Sigesoft.Common.Constants.PR_observaciones).v_Value1;
 
                     cells = new List<PdfPCell>()
                     {
