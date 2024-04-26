@@ -35964,7 +35964,21 @@ namespace Sigesoft.Node.WinClient.BLL
 
             return string.Join(", ", query.Select(p => p.v_Restricction));
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pobjOperationResult"></param>
+        /// <param name="pintPageIndex"></param>
+        /// <param name="pintResultsPerPage"></param>
+        /// <param name="pstrSortExpression"></param>
+        /// <param name="pstrFilterExpression"></param>
+        /// <param name="pdatBeginDate"></param>
+        /// <param name="pdatEndDate"></param>
+        /// <param name="componentIds"></param>
+        /// <param name="pFci"></param>
+        /// <param name="pFcf"></param>
+        /// <param name="pstrDxs"></param>
+        /// <returns></returns>
         public BindingList<ServiceGridJerarquizadaList> GetServicesPagedAndFiltered(ref OperationResult pobjOperationResult, int? pintPageIndex, int? pintResultsPerPage, string pstrSortExpression, string pstrFilterExpression, DateTime? pdatBeginDate, DateTime? pdatEndDate, List<string> componentIds, DateTime? pFci, DateTime? pFcf, string pstrDxs)
         {
             //mon.IsActive = true;
